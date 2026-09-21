@@ -1,0 +1,18 @@
+schema_version = 1
+
+[[law]]
+id = "category.identity.bounded-v1"
+status = "spike"
+claim = "A declared identity mapping preserves every value in the supplied finite observation domain."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "category.composition.bounded-v1"
+status = "spike"
+claim = "Nested and composed evaluation agree over the supplied finite observation domain."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[forbidden_verdicts]
+values = ["proved", "certificate_accepted", "deployment_authorized", "policy_satisfied"]
