@@ -2,30 +2,39 @@
 
 This inventory was derived from the open `polyglot/migration-v1` manifests and current default-branch source trees. Twelve repositories declare Haskell as a primary or supporting language.
 
-Two meanings must remain separate:
+Source-model extraction means isolating pure semantics and independently
+reimplementing it as Haskell. Mechanical extraction means tool-generated
+Haskell from a named formal source. No current candidate has been verified as
+mechanically extractable.
 
-- **Source-model extraction**: isolate pure semantics from operational code and independently reimplement them as an authored Haskell oracle.
-- **Mechanical extraction**: tool-generated Haskell from a named formal source.
-
-No current candidate has been verified as mechanically extractable. Lean, Mojo, Python, Elixir, and prose sources do not become “extracted artifacts” through manual translation.
-
-| Priority | Repository | Evidence-backed source | Proposed oracle | Status |
-|---|---|---|---|---|
-| P0 | `sprucegoose` | deployment lifecycle, projection, record, and tests | Deployment transition and replay laws | Authored oracle |
-| P0 | `pisot-substitution-conjecture-research` | BPA, overlap graph, Mojo certificate modules | Balanced-pair/SCC/productivity semantics | Authored oracle |
-| P0 | `finite-math-kernels` | typed proof graph, substitution automaton, fixtures | Graph normalization and bounded automata | Authored oracle |
-| P1 | `coop_substrate` | rule modules, event store, replay tests | Rule evaluation and event-fold equivalence | Authored oracle |
-| P1 | `objective-review-metasytem` | advisor and decision-data builder | Decision-plan/path preservation | Authored oracle |
-| P1 | `finite-mandelbrot-research` | projective multiset, C1 status, regime fixtures | Structural comparison only | Authored oracle; never acceptance |
-| P2 | `halaqa` | Senad+ and effect-ledger specifications | Transcript/disclosure/effect semantics | Specification-derived oracle |
-| P2 | `agent-icm` | Syncthing policy guard and tests | Narrow command-policy parser | Authored oracle; not ICM state semantics |
-| Hold | `closure-fiber-of-multiplication-research` | executable is currently a placeholder | Closure/Hurwitz model | Blocked |
-| Hold | `keel` | README only | Deontic and VCPlan/VCGraph semantics | Greenfield |
-| Hold | `height-pairings-bsd-interfaces` | computation/example README files only | Height/regulator interfaces | Await executable Julia/Lean model |
-| Exclude | `icm-hub` | aggregated workspaces and vendored material | None | No owned replay core isolated |
+| Priority | Repository | Proposed model | Initial authority posture |
+|---|---|---|---|
+| P0 | `sprucegoose` | Deployment transition and replay laws | Candidate normative semantic contract |
+| P0 | `pisot-substitution-conjecture-research` | Balanced-pair/SCC/productivity semantics | Advisory mathematical oracle |
+| P0 | `finite-math-kernels` proof graph | Claim-graph normalization | Candidate normative semantic contract |
+| P0 | `finite-math-kernels` automaton | Bounded substitution automata | Advisory mathematical oracle |
+| P1 | `coop_substrate` | Rule evaluation and event-fold equivalence | Candidate normative semantic contract |
+| P1 | `objective-review-metasytem` | Decision-plan/path preservation | Candidate normative semantic contract |
+| P1 | `finite-mandelbrot-research` | Structural comparison | Advisory mathematical oracle |
+| P2 | `halaqa` | Senad+ transcript/disclosure structure | Candidate normative semantic contract |
+| P2 | `agent-icm` | Narrow command-policy parser | Advisory until independently registered |
+| Hold | `closure-fiber-of-multiplication-research` | Closure/Hurwitz model | Blocked: executable source is a placeholder |
+| Hold | `keel` | Deontic and VCPlan/VCGraph semantics | Greenfield future normative contract |
+| Hold | `height-pairings-bsd-interfaces` | Height/regulator interfaces | Await executable Julia/Lean model |
+| Exclude | `icm-hub` | None | No owned replay core isolated |
 
 ## Promotion gates
 
-A candidate may enter `domains/` only after it has a pinned source revision and paths, stated preconditions, canonical vectors owned by the domain repository, a named authoritative peer, fail-closed disagreement behavior, artifact classification, and license/provenance clearance.
+Normative semantic authority requires:
 
-The Haskell oracle cannot replace proof, certificate acceptance, authorization, or deployment authority.
+1. a stable contract identifier and semantic version;
+2. pinned sources, provenance, and license status;
+3. explicit authoritative and excluded questions;
+4. stated preconditions and canonical normal forms;
+5. domain-owned conformance vectors;
+6. fail-closed disagreement behavior;
+7. approval at the domain's canonical authority boundary.
+
+Haskell authority governs meaning within that registration. It does not establish
+mathematical truth, accept certificates, authorize effects, or own persisted
+operational state.
