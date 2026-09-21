@@ -1,7 +1,12 @@
 module Main (main) where
 
 import Oracle.Category (FiniteMap (..), compositionLaw, identityLaw)
-import Oracle.Result (OracleResult (..), isAuthoritative)
+import Oracle.Result
+  ( AuthorityMode (..)
+  , AuthorityQuestion (..)
+  , OracleResult (..)
+  , authoritativeFor
+  )
 import Test.QuickCheck
   ( Property
   , (===)
@@ -19,12 +24,43 @@ compositionProperty xs =
       h = FiniteMap (subtract 3)
    in compositionLaw xs f g h === True
 
-authorityProperty :: String -> Property
-authorityProperty detail =
-  isAuthoritative (ModelsDisagree detail :: OracleResult String) === False
+normativeSemanticAuthorityProperty :: Property
+normativeSemanticAuthorityProperty =
+  authoritativeFor
+    NormativeSemantic
+    CompositionPreservation
+    (ModelsAgree :: OracleResult String)
+    === True
+
+advisoryNeverAuthoritativeProperty :: String -> Property
+advisoryNeverAuthoritativeProperty detail =
+  authoritativeFor
+    AdvisoryOracle
+    ObservationalEquivalence
+    (ModelsDisagree detail :: OracleResult String)
+    === False
+
+excludedAuthorityProperty :: Property
+excludedAuthorityProperty =
+  authoritativeFor
+    NormativeSemantic
+    CertificateAcceptance
+    (ModelsAgree :: OracleResult String)
+    === False
+
+inconclusiveNeverAuthoritativeProperty :: String -> Property
+inconclusiveNeverAuthoritativeProperty detail =
+  authoritativeFor
+    NormativeSemantic
+    ContractInterpretation
+    (Inconclusive detail :: OracleResult String)
+    === False
 
 main :: IO ()
 main = do
   quickCheck identityProperty
   quickCheck compositionProperty
-  quickCheck authorityProperty
+  quickCheck normativeSemanticAuthorityProperty
+  quickCheck advisoryNeverAuthoritativeProperty
+  quickCheck excludedAuthorityProperty
+  quickCheck inconclusiveNeverAuthoritativeProperty
