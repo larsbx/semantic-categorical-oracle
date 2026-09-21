@@ -1,32 +1,50 @@
 # Authority boundary
 
-This repository is an independent semantic and categorical oracle.
+This repository may be authoritative for explicitly registered, versioned
+executable semantic contracts. Authority is assigned per contract and per
+question; it is never inferred merely because a Haskell implementation exists.
 
-It may:
+A normative semantic contract may decide:
 
-- evaluate laws over declared finite or generated domains;
-- compare independently implemented models;
-- emit minimized counterexamples;
-- preserve vendored or mechanically extracted reference artifacts;
-- produce canonical conformance vectors.
+- contract interpretation;
+- canonical normal form;
+- observational equivalence;
+- preservation of sequencing, branching, binders, provenance, or composition.
 
-It may not:
+It may not decide:
 
-- declare a theorem proved;
-- accept a mathematical or cryptographic certificate;
-- authorize a deployment, policy decision, or governed effect;
-- silently become the canonical implementation of a domain rule.
+- whether a mathematical proposition is proved;
+- whether a mathematical or cryptographic certificate is accepted;
+- whether a deployment, policy decision, or governed effect is authorized;
+- what persisted operational state currently exists.
 
-A successful property run means only `law_holds_for_test_domain`. It is evidence,
-not universal proof. A counterexample is meaningful only when its generated value
-satisfies the registered law preconditions.
+Lean retains proof authority. Designated Mojo or Rust checkers retain certificate
+acceptance. Keel, SpruceGoose, Ash resources, and their ledgers retain
+authorization and operational-state authority.
+
+## Authority modes
+
+- `normative_semantic`: canonical executable meaning for a registered contract
+  version and its declared semantic questions.
+- `advisory_oracle`: independent comparison, counterexample generation, or
+  bounded testing without normative authority.
+
+Only a conclusive result from a `normative_semantic` contract is authoritative
+within that contract's declared scope. `inconclusive` and `oracle_error` are
+never authoritative.
+
+A bounded property success is not automatically a universal theorem. Its
+authority can establish behavior over the registered domain or contract
+interpretation, but cannot promote itself to mathematical proof.
 
 ## Artifact classes
 
-Every future domain model must be labelled as one of:
+Every model must be labelled as one of:
 
 1. `authored_oracle` — independently implemented Haskell semantics;
 2. `extracted_artifact` — mechanically generated from a named source and toolchain;
 3. `vendored_reference` — immutable upstream source plus explicit local patches.
 
-Manual translations must not be labelled as extracted.
+Any artifact class may be advisory. Normative authority additionally requires an
+approved contract registration, version, questions, provenance, and conformance
+suite. Manual translations must not be labelled as extracted.
