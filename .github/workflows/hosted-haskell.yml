@@ -45,7 +45,7 @@ jobs:
         run: cabal build all --enable-tests --ghc-options="-Werror"
 
       - name: Run property suite
-        run: cabal test all --test-show-details=direct
+        run: cabal test all --enable-tests --test-show-details=direct
 
       - name: Run oracle smoke executable
         run: |
