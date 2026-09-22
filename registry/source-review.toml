@@ -1,0 +1,120 @@
+schema_version = 1
+verified_at = "2026-09-22"
+verification_rule = "Each path was resolved through the GitHub contents API at the exact review revision; blob SHA records the observed content."
+
+[[review]]
+candidate_id = "sprucegoose-deployment-reducer"
+repository = "larsbx/sprucegoose"
+revision = "c211ff67f244d92351a7bdf270987bbb619a6b0d"
+files = [
+  { path = "lib/spruce_goose/deployment/lifecycle.ex", blob = "a47ab664431734fc85e3cf63c841f30dc2c8cac1" },
+  { path = "lib/spruce_goose/deployment/projection.ex", blob = "079c59144f35e629daac0753c21544551ddf7508" },
+  { path = "lib/spruce_goose/deployment/record.ex", blob = "3ec4c6cb7031903ce60d6322b0b9d71dd63a1bba" },
+]
+
+[[review]]
+candidate_id = "psc-balanced-pair-semantics"
+repository = "larsbx/pisot-substitution-conjecture-research"
+revision = "341faf4d534ad1f5396ada7561a263157cdf2f3f"
+files = [
+  { path = "src/psc_research/bpa.py", blob = "ec21e6b8bc566cd2e7300818903e09bbecacf8c4" },
+  { path = "src/psc_research/overlap_graph.py", blob = "c5fcff41dfd005fbd430d0384e5a0de360297d5b" },
+  { path = "mojo/psc/bpa.mojo", blob = "0bbb2fe7b243b0d4bd22e92e7aa30f4bd80bfdd4" },
+  { path = "mojo/psc/certificate.mojo", blob = "9fe1f29614b392f39d698f1d222a0ee55dca638b" },
+]
+
+[[review]]
+candidate_id = "finite-proof-graph"
+repository = "larsbx/finite-math-kernels"
+revision = "72e1d38b7fe6d2262ed978bf0bc34ea2ff40805f"
+files = [
+  { path = "proof_records/graph.py", blob = "ef2e4bbe3b1dbc16ec6bc501b06991a9fd7b8f00" },
+  { path = "proof_records/records.py", blob = "802ab06fcdf0e09ec652283acce7fe72701f58e4" },
+  { path = "fixtures/ledger/relationship-graph.json", blob = "d1e910f4e768e2372bb9df6bc28058c8ee0904be" },
+  { path = "fixtures/ledger/proof-graph-normalization-v1.json", blob = "42099396d382cdfd7fac8f807b4e32cd8fb3e679" },
+]
+
+[[review]]
+candidate_id = "finite-substitution-automaton"
+repository = "larsbx/finite-math-kernels"
+revision = "cdb40f1166d9095f835f23520c04604ed08432b6"
+files = [
+  { path = "substitution_dynamics/automaton.mojo", blob = "e94d702a03badeeeb1af97fa9808fdcdc35a7e12" },
+  { path = "substitution_dynamics/balanced_pairs.mojo", blob = "9cc1c10b81df03f83db5502509c3088cf04e5291" },
+]
+
+[[review]]
+candidate_id = "cooperative-rule-replay"
+repository = "larsbx/coop_substrate"
+revision = "ef206957eb041f8b8f011a9721886e66048a09e2"
+files = [
+  { path = "lib/coop_substrate/capital/rules/linear_v1.ex", blob = "6de446d3742ce44d97a37088a0208c9fecde92fb" },
+  { path = "lib/coop_substrate/event_store.ex", blob = "eda72d9ead8b95c0da520404e9af803e0d06346f" },
+  { path = "test/replay_test.exs", blob = "de9810d23204b986da4360f86b0ca787b9d81d81" },
+]
+
+[[review]]
+candidate_id = "objective-review-decision-plan"
+repository = "larsbx/objective-review-metasytem"
+revision = "5b45577fdfe048de0fab787daeb7dca68c276e90"
+files = [
+  { path = "scripts/advisor.py", blob = "22ccb0e5a940c07571ec65a88531bc2547da3716" },
+  { path = "scripts/build_agents_data.py", blob = "e44aed011164b6085b28ae22c17386fdf5de3f20" },
+]
+
+[[review]]
+candidate_id = "finite-mandelbrot-structural-model"
+repository = "larsbx/finite-mandelbrot-research"
+revision = "3ff8990a1cb762c242f945e91a57150e418ad5fa"
+files = [
+  { path = "src/projective_multiset.mojo", blob = "36afa0c886c1dad0a8af863f8712f94a998919a1" },
+  { path = "src/C1_theorem_status.mojo", blob = "9dbde8414b86f467f0ea6a011a9aa296f2b65577" },
+  { path = "spec/regime_correspondences.toml", blob = "1c6339b3c471a07b67500ae0ac67a3f009cd5c0d" },
+]
+
+[[review]]
+candidate_id = "senad-transcript-semantics"
+repository = "larsbx/halaqa"
+revision = "ed6518fffb831e05967d480c6baa9c027fd7d90e"
+files = [
+  { path = "shared/sanad-plus/specification.md", blob = "ae10f9a9c3a8d3f69b04e5607ffe4900462c90cb" },
+  { path = "shared/sanad-plus/AddressSlotList.md", blob = "896b3b6277864e0d759d7f9cdde23040816a7b64" },
+  { path = "shared/sanad-plus/disclosure-form-a.md", blob = "da2e5c7c439d473503403dfacdd3dd02ded442d7" },
+  { path = "shared/sanad-plus/disclosure-form-b.md", blob = "6ad3633ae4d4de7f15096acdc7655fcb143aa316" },
+]
+
+[[review]]
+candidate_id = "agent-icm-command-policy"
+repository = "larsbx/agent-icm"
+revision = "a821e622a3bb5c6961c36e95c8b4b5d80db8cc43"
+files = [
+  { path = "lib/syncthing-policy.py", blob = "d474bf7a0dc2aef59dd21ab8a089ad97b9fa0853" },
+  { path = "tests/test_syncthing_policy.py", blob = "4e1a3189b82ef5d16530efdc81b080e7e6eb7a6c" },
+]
+
+[[review]]
+candidate_id = "closure-fiber-semantics"
+repository = "larsbx/closure-fiber-of-multiplication-research"
+revision = "6815ebfd7ccfcb6d32b90848911be329e950576e"
+files = [{ path = "src/main.mojo", blob = "b30f8fb7afd0afd19fc0f456cbb99afc59750dfc" }]
+
+[[review]]
+candidate_id = "keel-deontic-semantics"
+repository = "larsbx/keel"
+revision = "abb0f9bc68c5c1f5b1f237404f61309aad3c6c8e"
+files = [{ path = "README.md", blob = "eb1a71542cf3be817b96a141aeacdccb94fdf753" }]
+
+[[review]]
+candidate_id = "height-pairing-semantics"
+repository = "larsbx/height-pairings-bsd-interfaces"
+revision = "07da3bedf393b40d34de212cbd8fe8cde816e430"
+files = [
+  { path = "computations/README.md", blob = "f1923a19b316c7dbaa40ccbb3569e6da6a6ff15a" },
+  { path = "examples/README.md", blob = "0802e1788a981d0c32c3ae8f0a7344c5db2476d2" },
+]
+
+[[review]]
+candidate_id = "icm-hub-event-replay"
+repository = "larsbx/icm-hub"
+revision = "5bd837874f5450df9bf30f917db7520a1e9fc446"
+files = []
