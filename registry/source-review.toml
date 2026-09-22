@@ -26,7 +26,7 @@ files = [
 [[review]]
 candidate_id = "finite-proof-graph"
 repository = "larsbx/finite-math-kernels"
-revision = "72e1d38b7fe6d2262ed978bf0bc34ea2ff40805f"
+revision = "30b563fca4866fcf4c402d4e215b56eefc80e655"
 files = [
   { path = "proof_records/graph.py", blob = "ef2e4bbe3b1dbc16ec6bc501b06991a9fd7b8f00" },
   { path = "proof_records/records.py", blob = "802ab06fcdf0e09ec652283acce7fe72701f58e4" },
