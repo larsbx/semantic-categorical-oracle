@@ -11,7 +11,7 @@ mechanically extractable.
 |---|---|---|---|
 | P0 | `sprucegoose` | Deployment transition and replay laws | Candidate normative semantic contract |
 | P0 | `pisot-substitution-conjecture-research` | Balanced-pair/SCC/productivity semantics | Advisory mathematical oracle |
-| P0 | `finite-math-kernels` proof graph | Claim-graph normalization | Candidate normative semantic contract |
+| P0 | `finite-math-kernels` proof graph | Claim-graph normalization | Approved `finite-proof-graph.normalization@1.0.0` normative semantic contract |
 | P0 | `finite-math-kernels` automaton | Bounded substitution automata | Advisory mathematical oracle |
 | P1 | `coop_substrate` | Rule evaluation and event-fold equivalence | Candidate normative semantic contract |
 | P1 | `objective-review-metasytem` | Decision-plan/path preservation | Candidate normative semantic contract |
@@ -38,3 +38,12 @@ Normative semantic authority requires:
 Haskell authority governs meaning within that registration. It does not establish
 mathematical truth, accept certificates, authorize effects, or own persisted
 operational state.
+
+## First approved contract
+
+`finite-proof-graph.normalization@1.0.0` is pinned to finite-math-kernels commit
+`cdb40f1166d9095f835f23520c04604ed08432b6`. The domain repository owns the
+registration and canonical vectors; this repository carries an independent
+Haskell normalizer and vendored vector copies. A disagreement or malformed
+graph is a refusal, never an alternate authoritative answer. The contract does
+not interpret provenance labels as proof or certificate verdicts.

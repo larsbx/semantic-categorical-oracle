@@ -40,6 +40,14 @@ authoritative_questions = ["contract_interpretation", "normal_form", "compositio
 source_paths = ["proof_records/graph.py", "proof_records/records.py", "fixtures/ledger/relationship-graph.json"]
 operational_authority = "finite-math-kernels proof-record replay"
 allowed = true
+contract_id = "finite-proof-graph.normalization"
+contract_version = "1.0.0"
+contract_status = "approved"
+source_commit = "cdb40f1166d9095f835f23520c04604ed08432b6"
+domain_contract_path = "contracts/typed-proof-graph-normalization-v1.json"
+domain_vector_path = "fixtures/oracle/typed-proof-graph-minimal-v1.expected.json"
+excluded_authority = ["observational_equivalence", "mathematical_proof", "certificate_acceptance", "effect_authorization", "persisted_state"]
+disagreement = "fail_closed"
 
 [[candidate]]
 id = "finite-substitution-automaton"
