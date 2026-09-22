@@ -1,0 +1,54 @@
+name: Hosted Haskell advisory CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hosted-haskell-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cabal:
+    name: GHC 9.12.4 / Cabal 3.18.1.0
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install Haskell toolchain
+        uses: haskell-actions/setup@cd0d9bdd65b20557f41bea4dbe43d0b5fbbfe553 # v2.11.0
+        with:
+          ghc-version: "9.12.4"
+          cabal-version: "3.18.1.0"
+
+      - name: Report toolchain
+        run: |
+          ghc --version
+          cabal --version
+
+      - name: Validate package metadata
+        run: cabal check
+
+      - name: Resolve dependencies
+        run: cabal build all --enable-tests --dry-run
+
+      - name: Build with warnings as errors
+        run: cabal build all --enable-tests --ghc-options="-Werror"
+
+      - name: Run property suite
+        run: cabal test all --test-show-details=direct
+
+      - name: Run oracle smoke executable
+        run: |
+          output="$(cabal run semantic-categorical-oracle)"
+          printf '%s\n' "$output"
+          test "$output" = "LawHoldsForTestDomain"
