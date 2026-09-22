@@ -11,10 +11,13 @@ repository = "larsbx/sprucegoose"
 priority = "P0"
 classification = "authored_oracle"
 authority_mode = "normative_semantic_candidate"
+implementation_status = "spike_review"
 authority_scope = "deployment-transition-v1"
+source_revision = "c211ff67f244d92351a7bdf270987bbb619a6b0d"
 authoritative_questions = ["contract_interpretation", "normal_form", "composition_preservation"]
 source_paths = ["lib/spruce_goose/deployment/lifecycle.ex", "lib/spruce_goose/deployment/projection.ex", "lib/spruce_goose/deployment/record.ex"]
 operational_authority = "SpruceGoose deployment domain"
+review_vectors = ["successful_deployment", "failed_then_rolled_back", "cancelled", "illegal_skip_refused"]
 allowed = true
 
 [[candidate]]

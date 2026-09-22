@@ -15,6 +15,7 @@ library
   exposed-modules:
       Oracle.Category
       Oracle.Result
+      Oracle.SpruceGoose.DeploymentLifecycle
   build-depends:
       base >=4.17 && <5
 
