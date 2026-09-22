@@ -1,34 +1,26 @@
 # Semantic Categorical Oracle
 
-A standalone Haskell oracle for executable semantic models, categorical laws,
+A standalone Haskell home for executable semantic contracts, categorical laws,
 model comparison, and counterexample discovery across the estate.
 
-## Spike scope
+The repository supports two modes:
 
-The first spike provides:
+- **normative semantic contracts**, authoritative for explicitly registered
+  questions such as interpretation, normal form, observational equivalence, and
+  composition preservation;
+- **advisory oracles**, which independently compare implementations without
+  acquiring domain authority.
 
-- an explicit non-authoritative result vocabulary;
-- bounded identity and composition checks;
-- QuickCheck properties;
-- a machine-readable law registry;
-- authority and spike-lifecycle policies.
+It never derives authority over mathematical proof, certificate acceptance,
+effect authorization, or persisted operational state.
 
-Run it with:
+Run the initial spike with:
 
 ```sh
 cabal test all
 cabal run semantic-categorical-oracle
 ```
 
-Expected executable result:
-
-```text
-LawHoldsForTestDomain
-```
-
-That verdict is evidence over the declared domain, not a proof. This repository
-cannot accept certificates, establish theorems, authorize governed effects, or
-replace a domain's canonical implementation.
-
 Future artifacts must be labelled `authored_oracle`, `extracted_artifact`, or
-`vendored_reference`; manual translations are never described as extracted.
+`vendored_reference`. Manual translations are never described as extracted,
+and semantic authority requires a separate versioned contract registration.

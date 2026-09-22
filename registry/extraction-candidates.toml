@@ -1,0 +1,159 @@
+schema_version = 2
+mechanically_extractable_verified = false
+
+[authority]
+normative_questions = ["contract_interpretation", "normal_form", "observational_equivalence", "composition_preservation"]
+globally_excluded = ["mathematical_proof", "certificate_acceptance", "effect_authorization", "persisted_state"]
+
+[[candidate]]
+id = "sprucegoose-deployment-reducer"
+repository = "larsbx/sprucegoose"
+priority = "P0"
+classification = "authored_oracle"
+authority_mode = "normative_semantic_candidate"
+authority_scope = "deployment-transition-v1"
+authoritative_questions = ["contract_interpretation", "normal_form", "composition_preservation"]
+source_paths = ["lib/spruce_goose/deployment/lifecycle.ex", "lib/spruce_goose/deployment/projection.ex", "lib/spruce_goose/deployment/record.ex"]
+operational_authority = "SpruceGoose deployment domain"
+allowed = true
+
+[[candidate]]
+id = "psc-balanced-pair-semantics"
+repository = "larsbx/pisot-substitution-conjecture-research"
+priority = "P0"
+classification = "authored_oracle"
+authority_mode = "advisory_oracle"
+authority_scope = "psc-balanced-pair-comparison-v1"
+authoritative_questions = []
+source_paths = ["src/psc_research/bpa.py", "src/psc_research/overlap_graph.py", "mojo/psc/bpa.mojo", "mojo/psc/certificate.mojo"]
+operational_authority = "PSC domain repository"
+allowed = true
+
+[[candidate]]
+id = "finite-proof-graph"
+repository = "larsbx/finite-math-kernels"
+priority = "P0"
+classification = "authored_oracle"
+authority_mode = "normative_semantic_candidate"
+authority_scope = "typed-proof-record-graph-v1"
+authoritative_questions = ["contract_interpretation", "normal_form", "composition_preservation"]
+source_paths = ["proof_records/graph.py", "proof_records/records.py", "fixtures/ledger/relationship-graph.json"]
+operational_authority = "finite-math-kernels proof-record replay"
+allowed = true
+
+[[candidate]]
+id = "finite-substitution-automaton"
+repository = "larsbx/finite-math-kernels"
+priority = "P0"
+classification = "authored_oracle"
+authority_mode = "advisory_oracle"
+authority_scope = "finite-substitution-automaton-comparison-v1"
+authoritative_questions = []
+source_paths = ["substitution_dynamics/automaton.mojo", "substitution_dynamics/balanced_pairs.mojo"]
+operational_authority = "finite-math-kernels Mojo implementation"
+allowed = true
+
+[[candidate]]
+id = "cooperative-rule-replay"
+repository = "larsbx/coop_substrate"
+priority = "P1"
+classification = "authored_oracle"
+authority_mode = "normative_semantic_candidate"
+authority_scope = "cooperative-rule-replay-v1"
+authoritative_questions = ["contract_interpretation", "normal_form", "observational_equivalence", "composition_preservation"]
+source_paths = ["lib/coop_substrate/capital/rules/linear_v1.ex", "lib/coop_substrate/event_store.ex", "test/replay_test.exs"]
+operational_authority = "coop_substrate"
+allowed = true
+
+[[candidate]]
+id = "objective-review-decision-plan"
+repository = "larsbx/objective-review-metasytem"
+priority = "P1"
+classification = "authored_oracle"
+authority_mode = "normative_semantic_candidate"
+authority_scope = "objective-review-decision-plan-v1"
+authoritative_questions = ["contract_interpretation", "normal_form", "composition_preservation"]
+source_paths = ["scripts/advisor.py", "scripts/build_agents_data.py"]
+operational_authority = "objective-review skill collection"
+allowed = true
+
+[[candidate]]
+id = "finite-mandelbrot-structural-model"
+repository = "larsbx/finite-mandelbrot-research"
+priority = "P1"
+classification = "authored_oracle"
+authority_mode = "advisory_oracle"
+authority_scope = "finite-mandelbrot-structural-comparison-v1"
+authoritative_questions = []
+source_paths = ["src/projective_multiset.mojo", "src/C1_theorem_status.mojo", "spec/regime_correspondences.toml"]
+operational_authority = "finite-mandelbrot Mojo checker"
+allowed = true
+excluded_authority = ["mathematical_proof", "certificate_acceptance", "C1_status_promotion"]
+
+[[candidate]]
+id = "senad-transcript-semantics"
+repository = "larsbx/halaqa"
+priority = "P2"
+classification = "authored_oracle"
+authority_mode = "normative_semantic_candidate"
+authority_scope = "senad-transcript-structure-v1"
+authoritative_questions = ["contract_interpretation", "normal_form", "observational_equivalence", "composition_preservation"]
+source_paths = ["shared/sanad-plus/specification.md", "shared/sanad-plus/AddressSlotList.md", "shared/sanad-plus/disclosure-form-a.md", "shared/sanad-plus/disclosure-form-b.md"]
+operational_authority = "Senad+ production verifier"
+allowed = true
+note = "Specification-derived, not mechanically extracted."
+
+[[candidate]]
+id = "agent-icm-command-policy"
+repository = "larsbx/agent-icm"
+priority = "P2"
+classification = "authored_oracle"
+authority_mode = "advisory_oracle"
+authority_scope = "agent-icm-command-policy-comparison-v1"
+authoritative_questions = []
+source_paths = ["lib/syncthing-policy.py", "tests/test_syncthing_policy.py"]
+operational_authority = "agent-icm policy guard"
+allowed = true
+note = "Narrow policy model only; not an ICM state model."
+
+[[candidate]]
+id = "closure-fiber-semantics"
+repository = "larsbx/closure-fiber-of-multiplication-research"
+priority = "hold"
+classification = "blocked"
+authority_mode = "none"
+source_paths = ["src/main.mojo"]
+allowed = false
+blocker = "Executable source is a placeholder."
+
+[[candidate]]
+id = "keel-deontic-semantics"
+repository = "larsbx/keel"
+priority = "hold"
+classification = "greenfield"
+authority_mode = "future_normative_semantic"
+authority_scope = "keel-deontic-v1"
+authoritative_questions = ["contract_interpretation", "normal_form", "observational_equivalence", "composition_preservation"]
+source_paths = ["README.md"]
+allowed = false
+blocker = "No executable or formal source exists on the default branch."
+
+[[candidate]]
+id = "height-pairing-semantics"
+repository = "larsbx/height-pairings-bsd-interfaces"
+priority = "hold"
+classification = "blocked"
+authority_mode = "none"
+source_paths = ["computations/README.md", "examples/README.md"]
+allowed = false
+blocker = "No executable semantic source exists on the default branch."
+
+[[candidate]]
+id = "icm-hub-event-replay"
+repository = "larsbx/icm-hub"
+priority = "exclude"
+classification = "excluded"
+authority_mode = "none"
+source_paths = []
+allowed = false
+blocker = "Aggregated workspaces and vendored material; no owned replay core isolated."
