@@ -7,9 +7,22 @@ import Oracle.Result
   , OracleResult (..)
   , authoritativeFor
   )
+import Oracle.SpruceGoose.DeploymentLifecycle
+  ( DeploymentState (..)
+  , Environment (..)
+  , TransitionError (..)
+  , allStates
+  , allowedTransitions
+  , isTerminal
+  , replayTransitions
+  , requiresRouting
+  , transition
+  )
 import Test.QuickCheck
   ( Property
   , (===)
+  , conjoin
+  , counterexample
   , quickCheck
   )
 
@@ -56,6 +69,55 @@ inconclusiveNeverAuthoritativeProperty detail =
     (Inconclusive detail :: OracleResult String)
     === False
 
+acceptedLifecycleEdgesProperty :: Property
+acceptedLifecycleEdgesProperty =
+  conjoin
+    [ counterexample (show from ++ " -> " ++ show to) (transition from to === Right to)
+    | from <- allStates
+    , to <- allowedTransitions from
+    ]
+
+unlistedLifecycleEdgesFailClosedProperty :: Property
+unlistedLifecycleEdgesFailClosedProperty =
+  conjoin
+    [ counterexample
+        (show from ++ " -/-> " ++ show to)
+        (transition from to === Left (IllegalTransition from to))
+    | from <- allStates
+    , to <- allStates
+    , to `notElem` allowedTransitions from
+    ]
+
+canonicalReplayProperty :: Property
+canonicalReplayProperty =
+  conjoin
+    [ replayTransitions [Building, Staged, Deploying, Verifying, Ready] === Right Ready
+    , replayTransitions [Building, Failed, RollingBack, RolledBack] === Right RolledBack
+    , replayTransitions [Cancelled] === Right Cancelled
+    , replayTransitions [Building, Ready] === Left (IllegalTransition Building Ready)
+    ]
+
+terminalClassificationProperty :: Property
+terminalClassificationProperty =
+  conjoin
+    [ isTerminal Ready === True
+    , isTerminal Failed === True
+    , isTerminal RolledBack === True
+    , isTerminal Cancelled === True
+    , isTerminal Queued === False
+    , isTerminal RollingBack === False
+    , transition Ready RollingBack === Right RollingBack
+    , transition Failed RollingBack === Right RollingBack
+    ]
+
+routingRequirementProperty :: Property
+routingRequirementProperty =
+  conjoin
+    [ requiresRouting Preview === False
+    , requiresRouting Staging === False
+    , requiresRouting Production === True
+    ]
+
 main :: IO ()
 main = do
   quickCheck identityProperty
@@ -64,3 +126,8 @@ main = do
   quickCheck advisoryNeverAuthoritativeProperty
   quickCheck excludedAuthorityProperty
   quickCheck inconclusiveNeverAuthoritativeProperty
+  quickCheck acceptedLifecycleEdgesProperty
+  quickCheck unlistedLifecycleEdgesFailClosedProperty
+  quickCheck canonicalReplayProperty
+  quickCheck terminalClassificationProperty
+  quickCheck routingRequirementProperty

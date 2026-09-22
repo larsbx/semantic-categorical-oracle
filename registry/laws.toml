@@ -14,5 +14,14 @@ claim = "Nested and composed evaluation agree over the supplied finite observati
 verdict_on_success = "law_holds_for_test_domain"
 proof_authority = false
 
+[[law]]
+id = "sprucegoose.deployment-transition-v1"
+status = "spike_review"
+claim = "The pinned state vocabulary, legal edges, terminal classification, routing requirement, and replay behavior define deployment-transition-v1."
+verdict_on_success = "contract_vectors_conform"
+proof_authority = false
+normative_semantic_candidate = true
+source_revision = "c211ff67f244d92351a7bdf270987bbb619a6b0d"
+
 [forbidden_verdicts]
 values = ["proved", "certificate_accepted", "deployment_authorized", "policy_satisfied"]
