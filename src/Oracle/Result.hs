@@ -10,7 +10,7 @@ module Oracle.Result
 data AuthorityMode
   = NormativeSemantic
   | AdvisoryOracle
-  deriving stock (Eq, Show)
+  deriving (Eq, Show)
 
 -- | Questions are typed so semantic authority cannot silently widen into proof,
 -- acceptance, authorization, or custody of operational state.
@@ -23,7 +23,7 @@ data AuthorityQuestion
   | CertificateAcceptance
   | EffectAuthorization
   | PersistedState
-  deriving stock (Eq, Show)
+  deriving (Eq, Show)
 
 data OracleResult counterexample
   = LawHoldsForTestDomain
@@ -32,7 +32,7 @@ data OracleResult counterexample
   | ModelsDisagree counterexample
   | Inconclusive String
   | OracleError String
-  deriving stock (Eq, Show)
+  deriving (Eq, Show)
 
 -- | A normative, registered contract may authoritatively answer semantic
 -- questions when the result is conclusive. Advisory models and excluded
