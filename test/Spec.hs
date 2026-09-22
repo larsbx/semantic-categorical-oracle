@@ -1,6 +1,12 @@
 module Main (main) where
 
 import Oracle.Category (FiniteMap (..), compositionLaw, identityLaw)
+import Oracle.ProofGraph
+  ( ProofEdge (..)
+  , ProofNode (..)
+  , normalizeEdges
+  , normalizeNodes
+  )
 import Oracle.Result
   ( AuthorityMode (..)
   , AuthorityQuestion (..)
@@ -40,11 +46,11 @@ advisoryNeverAuthoritativeProperty detail =
     (ModelsDisagree detail :: OracleResult String)
     === False
 
-excludedAuthorityProperty :: Property
-excludedAuthorityProperty =
+excludedAuthorityProperty :: AuthorityQuestion -> Property
+excludedAuthorityProperty question =
   authoritativeFor
     NormativeSemantic
-    CertificateAcceptance
+    question
     (ModelsAgree :: OracleResult String)
     === False
 
@@ -56,11 +62,45 @@ inconclusiveNeverAuthoritativeProperty detail =
     (Inconclusive detail :: OracleResult String)
     === False
 
+proofGraphNodeVector :: Property
+proofGraphNodeVector =
+  normalizeNodes
+    [ ProofNode "Lemma" "claim"
+    , ProofNode "Census" "claim"
+    , ProofNode "Proof" "claim"
+    ]
+    === [ ProofNode "Census" "claim"
+        , ProofNode "Lemma" "claim"
+        , ProofNode "Proof" "claim"
+        ]
+
+proofGraphProvenanceVector :: Property
+proofGraphProvenanceVector =
+  normalizeEdges
+    [ ProofEdge "implicative" "Galois" "Conditional" "open" "conditional/galois"
+    , ProofEdge "implicative" "Galois" "Conditional" "theorem-backed" "conditional/galois"
+    ]
+    === [ ProofEdge "implicative" "Galois" "Conditional" "open" "conditional/galois"
+        , ProofEdge "implicative" "Galois" "Conditional" "theorem-backed" "conditional/galois"
+        ]
+
+proofGraphDuplicateVector :: Property
+proofGraphDuplicateVector =
+  normalizeEdges [aliasEdge, aliasEdge] === [aliasEdge]
+ where
+  aliasEdge =
+    ProofEdge "synonymous" "PIP census" "Census" "theorem-backed" "aliases"
+
 main :: IO ()
 main = do
   quickCheck identityProperty
   quickCheck compositionProperty
   quickCheck normativeSemanticAuthorityProperty
   quickCheck advisoryNeverAuthoritativeProperty
-  quickCheck excludedAuthorityProperty
+  mapM_
+    (quickCheck . excludedAuthorityProperty)
+    [MathematicalProof, CertificateAcceptance, EffectAuthorization, PersistedState]
   quickCheck inconclusiveNeverAuthoritativeProperty
+  quickCheck proofGraphNodeVector
+  quickCheck proofGraphProvenanceVector
+  quickCheck proofGraphDuplicateVector
