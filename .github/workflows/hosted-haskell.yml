@@ -24,6 +24,9 @@ jobs:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
+      - name: Audit source pins and authority boundaries
+        run: python3 scripts/audit_contract_gates.py
+
       - name: Install Haskell toolchain
         uses: haskell-actions/setup@cd0d9bdd65b20557f41bea4dbe43d0b5fbbfe553 # v2.11.0
         with:

@@ -1,0 +1,62 @@
+schema_version = 1
+globally_excluded = ["mathematical_proof", "certificate_acceptance", "effect_authorization", "persisted_state"]
+
+[[contract]]
+candidate_id = "finite-proof-graph"
+contract_id = "finite-proof-graph-normalization"
+version = 1
+domain_repository = "larsbx/finite-math-kernels"
+domain_owner = "finite-math-kernels proof-record replay"
+status = "pending_domain_merge"
+questions = ["contract_interpretation", "normal_form", "composition_preservation"]
+excluded = ["mathematical_proof", "certificate_acceptance", "effect_authorization", "persisted_state"]
+canonical_vectors_path = "fixtures/ledger/proof-graph-normalization-v1.json"
+canonical_vectors_revision = "30b563fca4866fcf4c402d4e215b56eefc80e655"
+canonical_vectors_blob = "42099396d382cdfd7fac8f807b4e32cd8fb3e679"
+approval_evidence = "finite-math-kernels PR #22"
+implementation = "Oracle.ProofGraph"
+activation_rule = "May become normative only after the domain PR is merged and this pin is advanced to the resulting canonical revision."
+
+[[contract]]
+candidate_id = "sprucegoose-deployment-reducer"
+contract_id = "sprucegoose-deployment-transition"
+version = 1
+domain_repository = "larsbx/sprucegoose"
+domain_owner = "SpruceGoose deployment domain"
+status = "pending_domain_contract"
+questions = ["contract_interpretation", "normal_form", "composition_preservation"]
+excluded = ["effect_authorization", "persisted_state", "mathematical_proof", "certificate_acceptance"]
+blocker = "Identifier and semantic questions are plausible, but the deployment domain has not supplied canonical vectors or approval. Replay meaning must not become deployment authorization or state custody."
+
+[[contract]]
+candidate_id = "cooperative-rule-replay"
+contract_id = "cooperative-rule-replay"
+version = 1
+domain_repository = "larsbx/coop_substrate"
+domain_owner = "coop_substrate"
+status = "pending_domain_contract"
+questions = ["contract_interpretation", "normal_form", "observational_equivalence", "composition_preservation"]
+excluded = ["effect_authorization", "persisted_state", "mathematical_proof", "certificate_acceptance"]
+blocker = "The domain must define canonical replay inputs, equivalence, and ordering. Haskell cannot authorize cooperative effects or own the event store."
+
+[[contract]]
+candidate_id = "objective-review-decision-plan"
+contract_id = "objective-review-decision-plan"
+version = 1
+domain_repository = "larsbx/objective-review-metasytem"
+domain_owner = "objective-review skill collection"
+status = "pending_domain_contract"
+questions = ["contract_interpretation", "normal_form", "composition_preservation"]
+excluded = ["effect_authorization", "persisted_state", "mathematical_proof", "certificate_acceptance"]
+blocker = "The domain must specify which branches, binders, and sequencing constructs are semantic before vectors can be canonical."
+
+[[contract]]
+candidate_id = "senad-transcript-semantics"
+contract_id = "senad-transcript-structure"
+version = 1
+domain_repository = "larsbx/halaqa"
+domain_owner = "Senad+ production verifier"
+status = "pending_domain_contract"
+questions = ["contract_interpretation", "normal_form", "observational_equivalence", "composition_preservation"]
+excluded = ["certificate_acceptance", "effect_authorization", "persisted_state", "mathematical_proof"]
+blocker = "The specification can own structural encodings and equivalence, but the production verifier retains certificate acceptance and canonical vectors are not yet domain-owned."

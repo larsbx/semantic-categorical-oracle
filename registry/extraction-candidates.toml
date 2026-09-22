@@ -37,7 +37,7 @@ classification = "authored_oracle"
 authority_mode = "normative_semantic_candidate"
 authority_scope = "typed-proof-record-graph-v1"
 authoritative_questions = ["contract_interpretation", "normal_form", "composition_preservation"]
-source_paths = ["proof_records/graph.py", "proof_records/records.py", "fixtures/ledger/relationship-graph.json"]
+source_paths = ["proof_records/graph.py", "proof_records/records.py", "fixtures/ledger/relationship-graph.json", "fixtures/ledger/proof-graph-normalization-v1.json"]
 operational_authority = "finite-math-kernels proof-record replay"
 allowed = true
 
