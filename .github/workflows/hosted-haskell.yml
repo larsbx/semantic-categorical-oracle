@@ -49,6 +49,7 @@ jobs:
 
       - name: Run oracle smoke executable
         run: |
-          output="$(cabal run semantic-categorical-oracle)"
+          executable="$(cabal list-bin exe:semantic-categorical-oracle)"
+          output="$("$executable")"
           printf '%s\n' "$output"
           test "$output" = "LawHoldsForTestDomain"
