@@ -5,7 +5,7 @@ module Oracle.ProofGraph
   , normalizeEdges
   ) where
 
-import Data.List (group, sort)
+import Data.List (sort)
 
 -- | Representation-only node. This type carries ledger data; it does not decide
 -- whether a statement is proved or whether any certificate is accepted.
@@ -35,4 +35,11 @@ normalizeEdges :: [ProofEdge] -> [ProofEdge]
 normalizeEdges = uniqueSorted
 
 uniqueSorted :: Ord value => [value] -> [value]
-uniqueSorted = map head . group . sort
+uniqueSorted = deduplicate . sort
+ where
+  deduplicate [] = []
+  deduplicate (first : rest) = first : after first rest
+  after _ [] = []
+  after previous (current : rest)
+    | previous == current = after previous rest
+    | otherwise = current : after current rest
