@@ -1,0 +1,144 @@
+{
+  "model": "synthetic-not-jev",
+  "answers": {
+    "pair-0000": {
+      "type": "choice",
+      "choice": "distinct_object",
+      "probabilities": {
+        "distinct_object": 0.97,
+        "same_object": 0.03
+      },
+      "confidence": 0.94
+    },
+    "pair-0001": {
+      "type": "choice",
+      "choice": "distinct_object",
+      "probabilities": {
+        "distinct_object": 0.97,
+        "same_object": 0.03
+      },
+      "confidence": 0.94
+    },
+    "pair-0002": {
+      "type": "choice",
+      "choice": "distinct_object",
+      "probabilities": {
+        "distinct_object": 0.97,
+        "same_object": 0.03
+      },
+      "confidence": 0.94
+    },
+    "pair-0003": {
+      "type": "choice",
+      "choice": "same_object",
+      "probabilities": {
+        "same_object": 0.97,
+        "distinct_object": 0.03
+      },
+      "confidence": 0.94
+    },
+    "pair-0004": {
+      "type": "choice",
+      "choice": "distinct_object",
+      "probabilities": {
+        "distinct_object": 0.97,
+        "same_object": 0.03
+      },
+      "confidence": 0.94
+    },
+    "pair-0005": {
+      "type": "choice",
+      "choice": "distinct_object",
+      "probabilities": {
+        "distinct_object": 0.61,
+        "same_object": 0.39
+      },
+      "confidence": 0.22
+    },
+    "pair-0006": {
+      "type": "choice",
+      "choice": "distinct_object",
+      "probabilities": {
+        "distinct_object": 0.97,
+        "same_object": 0.03
+      },
+      "confidence": 0.94
+    },
+    "pair-0007": {
+      "type": "choice",
+      "choice": "distinct_object",
+      "probabilities": {
+        "distinct_object": 0.97,
+        "same_object": 0.03
+      },
+      "confidence": 0.94
+    },
+    "pair-0008": {
+      "type": "choice",
+      "choice": "distinct_object",
+      "probabilities": {
+        "distinct_object": 0.97,
+        "same_object": 0.03
+      },
+      "confidence": 0.94
+    },
+    "pair-0009": {
+      "type": "choice",
+      "choice": "distinct_object",
+      "probabilities": {
+        "distinct_object": 0.97,
+        "same_object": 0.03
+      },
+      "confidence": 0.94
+    },
+    "pair-0010": {
+      "type": "choice",
+      "choice": "distinct_object",
+      "probabilities": {
+        "distinct_object": 0.97,
+        "same_object": 0.03
+      },
+      "confidence": 0.94
+    },
+    "pair-0011": {
+      "type": "choice",
+      "choice": "distinct_object",
+      "probabilities": {
+        "distinct_object": 0.97,
+        "same_object": 0.03
+      },
+      "confidence": 0.94
+    },
+    "pair-0012": {
+      "type": "choice",
+      "choice": "distinct_object",
+      "probabilities": {
+        "distinct_object": 0.97,
+        "same_object": 0.03
+      },
+      "confidence": 0.94
+    },
+    "pair-0013": {
+      "type": "choice",
+      "choice": "distinct_object",
+      "probabilities": {
+        "distinct_object": 0.97,
+        "same_object": 0.03
+      },
+      "confidence": 0.94
+    },
+    "pair-0014": {
+      "type": "choice",
+      "choice": "distinct_object",
+      "probabilities": {
+        "distinct_object": 0.97,
+        "same_object": 0.03
+      },
+      "confidence": 0.94
+    }
+  },
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}

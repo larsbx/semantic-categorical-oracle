@@ -1,0 +1,56 @@
+cabal-version:      3.0
+name:               jev-alias-spike
+version:            0.1.0.0
+synopsis:           Spike: Jev (TypeSafe System One) as an advisory alias oracle
+license:            BSD-3-Clause
+build-type:         Simple
+extra-doc-files:    README.md
+extra-source-files: fixtures/*.json
+
+common warnings
+  ghc-options: -Wall -Wcompat -Werror=incomplete-patterns
+  default-language: GHC2021
+  default-extensions: OverloadedStrings, LambdaCase
+
+library
+  import: warnings
+  hs-source-dirs: src
+  exposed-modules:
+      Jev.Alias
+      Jev.Gate
+      Jev.Typed
+      Jev.Wire
+  build-depends:
+      base >=4.17 && <5,
+      aeson >=2.1 && <2.3,
+      containers >=0.6 && <0.8,
+      text >=2.0 && <2.2,
+      semantic-categorical-oracle
+
+executable jev-alias-spike
+  import: warnings
+  hs-source-dirs: app
+  main-is: Main.hs
+  build-depends:
+      base >=4.17 && <5,
+      aeson >=2.1 && <2.3,
+      bytestring >=0.11 && <0.13,
+      http-client >=0.7 && <0.8,
+      http-client-tls >=0.3 && <0.4,
+      http-types >=0.12 && <0.13,
+      jev-alias-spike,
+      semantic-categorical-oracle
+
+test-suite jev-alias-laws
+  import: warnings
+  type: exitcode-stdio-1.0
+  hs-source-dirs: test
+  main-is: Spec.hs
+  build-depends:
+      base >=4.17 && <5,
+      aeson >=2.1 && <2.3,
+      bytestring >=0.11 && <0.13,
+      containers >=0.6 && <0.8,
+      QuickCheck >=2.14 && <2.16,
+      jev-alias-spike,
+      semantic-categorical-oracle
