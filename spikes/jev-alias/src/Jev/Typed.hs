@@ -1,3 +1,5 @@
+{-# LANGUAGE AllowAmbiguousTypes #-}
+
 -- | Type-directed Choice questions: a finite Haskell sum type is the option
 -- set, so encoding is total and decoding either yields a value of that type
 -- or a precise wire-contract violation. Nothing here interprets confidence.

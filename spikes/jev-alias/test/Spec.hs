@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wno-orphans #-}
+
 module Main (main) where
 
 import Data.Aeson (Value, decode, eitherDecode, toJSON)
@@ -89,7 +91,7 @@ prop_codecTotal r (Unit c) = (selected <$> decodeChoice @Relation (answerFor r c
 
 prop_rejectsForeignOptionSet :: Property
 prop_rejectsForeignOptionSet =
-  property (isLeft (decodeChoice @Relation =<< Right (fromJust (Map.lookup "department" . answers =<< decode docChoiceResponse))))
+  property (maybe False (isLeft . decodeChoice @Relation) (Map.lookup "department" . answers =<< decode docChoiceResponse))
 
 prop_rejectsNonDistribution :: Relation -> Property
 prop_rejectsNonDistribution r =
@@ -102,7 +104,7 @@ prop_gateMonotone r (Unit c) (Unit a) (Unit b) =
   let (lo, hi) = (min a b, max a b)
       d = Decision r [] c
       acts f = case gate (fromJust (mkFloor f)) d of Act _ -> True; Escalate _ _ -> False
-   in acts hi ==> acts lo
+   in property (not (acts hi) || acts lo)
 
 prop_floorBounded :: Double -> Property
 prop_floorBounded f = isJust (mkFloor f) === (0 <= f && f <= 1)

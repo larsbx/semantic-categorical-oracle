@@ -25,7 +25,7 @@ library
       aeson >=2.1 && <2.3,
       containers >=0.6 && <0.8,
       text >=2.0 && <2.2,
-      semantic-categorical-oracle
+      semantic-categorical-oracle ==0.1.*
 
 executable jev-alias-spike
   import: warnings
@@ -39,7 +39,7 @@ executable jev-alias-spike
       http-client-tls >=0.3 && <0.4,
       http-types >=0.12 && <0.13,
       jev-alias-spike,
-      semantic-categorical-oracle
+      semantic-categorical-oracle ==0.1.*
 
 test-suite jev-alias-laws
   import: warnings
@@ -53,4 +53,4 @@ test-suite jev-alias-laws
       containers >=0.6 && <0.8,
       QuickCheck >=2.14 && <2.16,
       jev-alias-spike,
-      semantic-categorical-oracle
+      semantic-categorical-oracle ==0.1.*

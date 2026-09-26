@@ -8,7 +8,7 @@ import Data.Maybe (fromJust)
 import Jev.Alias (Probe (..), judge, probe)
 import Jev.Gate (Floor, mkFloor)
 import Jev.Wire (Request, Response)
-import Network.HTTP.Client
+import Network.HTTP.Client qualified as HTTP
 import Network.HTTP.Client.TLS (newTlsManager)
 import Network.HTTP.Types (statusCode)
 import Oracle.ProofGraph (ProofEdge (..), ProofNode (..))
@@ -50,20 +50,19 @@ live body =
     Nothing -> pure (Left "TYPESAFE_API_KEY is not set")
     Just key -> do
       manager <- newTlsManager
-      initial <- parseRequest "POST https://api.typesafe.ai/v1/systemone"
+      initial <- HTTP.parseRequest "POST https://api.typesafe.ai/v1/systemone"
       let request =
             initial
-              { requestHeaders =
+              { HTTP.requestHeaders =
                   [("Authorization", "Bearer " <> BS.pack key), ("Content-Type", "application/json")]
-              , requestBody = RequestBodyLBS (encode body)
+              , HTTP.requestBody = HTTP.RequestBodyLBS (encode body)
               }
-      outcome <- try (httpLbs request manager)
+      outcome <- try (HTTP.httpLbs request manager)
       pure $ case outcome of
-        Left (failure :: HttpException) -> Left (show failure)
-        Right response
-          | statusCode (responseStatus response) == 200 -> eitherDecode (responseBody response)
-          | otherwise ->
-              Left ("HTTP " <> show (statusCode (responseStatus response)) <> ": " <> LBS.unpack (responseBody response))
+        Left (failure :: HTTP.HttpException) -> Left (show failure)
+        Right response -> case statusCode (HTTP.responseStatus response) of
+          200 -> eitherDecode (HTTP.responseBody response)
+          code -> Left ("HTTP " <> show code <> ": " <> LBS.unpack (HTTP.responseBody response))
 
 die' :: String -> IO a
 die' message = hPutStrLn stderr message >> exitFailure
