@@ -14,6 +14,13 @@ The repository supports two modes:
 It never derives authority over mathematical proof, certificate acceptance,
 effect authorization, or persisted operational state.
 
+## Active research integrations
+
+- **PSC Tier 2 Growth Bridge:** `docs/GROWTH_BRIDGE_CONTRACTS.md` proposes
+  versioned semantic contracts for cycle-basis equivalence, cocycle transport,
+  and fixture equivalence. These contracts may become normative only for their
+  explicitly registered semantic questions; they do not decide spectral truth.
+
 Run the initial spike with:
 
 ```sh
