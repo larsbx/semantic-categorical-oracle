@@ -1,6 +1,13 @@
 module Main (main) where
 
 import Oracle.Category (FiniteMap (..), compositionLaw, identityLaw)
+import Oracle.GrowthBridge
+  ( GrowthBridgeContract (..)
+  , ModuleWitness (..)
+  , contractId
+  , contractQuestion
+  , cycleBasisEquivalent
+  )
 import Oracle.ProofGraph
   ( ProofEdge (..)
   , ProofNode (..)
@@ -84,6 +91,46 @@ proofGraphProvenanceVector =
         , ProofEdge "implicative" "Galois" "Conditional" "theorem-backed" "conditional/galois"
         ]
 
+growthBridgeCycleBasisVector :: Property
+growthBridgeCycleBasisVector =
+  cycleBasisEquivalent left right === ModelsAgree
+ where
+  left = ModuleWitness "H_tail" "power-basis-phi" "module:abc"
+  right = ModuleWitness "H_tail" "power-basis-phi" "module:abc"
+
+growthBridgeRejectsDifferentModule :: Property
+growthBridgeRejectsDifferentModule =
+  cycleBasisEquivalent left right === ModelsDisagree "generated module identity differs"
+ where
+  left = ModuleWitness "H_tail" "power-basis-phi" "module:abc"
+  right = ModuleWitness "H_tail" "power-basis-phi" "module:def"
+
+growthBridgeRejectsCrossBasisComparison :: Property
+growthBridgeRejectsCrossBasisComparison =
+  cycleBasisEquivalent left right === ModelsDisagree "arithmetic basis identity differs"
+ where
+  left = ModuleWitness "H_tail" "power-basis-phi" "module:abc"
+  right = ModuleWitness "H_tail" "another-basis" "module:abc"
+
+growthBridgeEmptyIdentityFailsClosed :: Property
+growthBridgeEmptyIdentityFailsClosed =
+  cycleBasisEquivalent left right === OracleError "left.generated_module_id is empty"
+ where
+  left = ModuleWitness "H_tail" "power-basis-phi" ""
+  right = ModuleWitness "H_tail" "power-basis-phi" "module:abc"
+
+growthBridgeContractIsSemanticOnly :: Property
+growthBridgeContractIsSemanticOnly =
+  let result = cycleBasisEquivalent witness witness
+   in ( contractId GBCycleBasis001 == "GB-CYCLE-BASIS-001"
+          && contractQuestion GBCycleBasis001 == NormalForm
+          && authoritativeFor NormativeSemantic NormalForm result
+          && not (authoritativeFor NormativeSemantic MathematicalProof result)
+      )
+        === True
+ where
+  witness = ModuleWitness "H_tail" "power-basis-phi" "module:abc"
+
 proofGraphDuplicateVector :: Property
 proofGraphDuplicateVector =
   normalizeEdges [aliasEdge, aliasEdge] === [aliasEdge]
@@ -104,3 +151,8 @@ main = do
   quickCheck proofGraphNodeVector
   quickCheck proofGraphProvenanceVector
   quickCheck proofGraphDuplicateVector
+  quickCheck growthBridgeCycleBasisVector
+  quickCheck growthBridgeRejectsDifferentModule
+  quickCheck growthBridgeRejectsCrossBasisComparison
+  quickCheck growthBridgeEmptyIdentityFailsClosed
+  quickCheck growthBridgeContractIsSemanticOnly
