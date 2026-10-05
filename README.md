@@ -16,6 +16,13 @@ effect authorization, or persisted operational state.
 
 ## Active research integrations
 
+- **Ḥanbalī uṣūl kernel (advisory):** `Oracle.Usul.{Hukm,Argumentation,Taarud}`
+  mirror the Lean kernel in `larsbx/usul-al-fiqh-deontic-circuits` (registered as
+  candidate `usul-argumentation-kernel`, pinned in `registry/source-review.toml`).
+  Laws are bounded spikes; the grounded-extension vectors are generated from that
+  repository's `formal/fixtures/grounded-v1.json`, which Lean also checks. Lean keeps
+  proof authority, and nothing here decides a ḥukm.
+
 - **PSC Tier 2 Growth Bridge:** `docs/GROWTH_BRIDGE_CONTRACTS.md` proposes
   versioned semantic contracts for cycle-basis equivalence, cocycle transport,
   and fixture equivalence. These contracts may become normative only for their

@@ -14,5 +14,40 @@ claim = "Nested and composed evaluation agree over the supplied finite observati
 verdict_on_success = "law_holds_for_test_domain"
 proof_authority = false
 
+[[law]]
+id = "usul.hukm.sigma-involutive-v1"
+status = "spike"
+claim = "Omission status is an involution on the five taklifi statuses (exhaustive over Hukm). Mirrors Lean Usul.Hukm.σ_involutive."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.hukm.sigma-antitone-v1"
+status = "spike"
+claim = "Omission status reverses the valence order (exhaustive). Mirrors Lean Usul.Hukm.σ_antitone."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.af.grounded-least-complete-v1"
+status = "spike"
+claim = "The iterated grounded extension is conflict-free, complete, and contained in every complete extension, over generated AFs with at most 6 arguments. Mirrors Lean Usul.Dung.approx_admissible and approx_sub_complete."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.af.grounded-vectors-v1"
+status = "spike"
+claim = "The Haskell grounded extension agrees with the canonical vectors in usul-al-fiqh-deontic-circuits formal/fixtures/grounded-v1.json, which the Lean build also checks."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.taarud.resolution-order-v1"
+status = "spike"
+claim = "Conflict resolution tries jam, then naskh, then tarjih, and suspends judgement (tawaqquf) exactly when all three fail. Mirrors Lean Usul.resolve_tawaqquf_iff."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
 [forbidden_verdicts]
 values = ["proved", "certificate_accepted", "deployment_authorized", "policy_satisfied"]
