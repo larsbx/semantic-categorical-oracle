@@ -20,10 +20,14 @@ import Oracle.Result
   , OracleResult (..)
   , authoritativeFor
   )
+import Control.Monad (unless)
+import System.Exit (exitFailure)
 import Test.QuickCheck
   ( Property
   , (===)
-  , quickCheck
+  , isSuccess
+  , property
+  , quickCheckResult
   )
 
 identityProperty :: [Int] -> Property
@@ -140,19 +144,26 @@ proofGraphDuplicateVector =
 
 main :: IO ()
 main = do
-  quickCheck identityProperty
-  quickCheck compositionProperty
-  quickCheck normativeSemanticAuthorityProperty
-  quickCheck advisoryNeverAuthoritativeProperty
-  mapM_
-    (quickCheck . excludedAuthorityProperty)
-    [MathematicalProof, CertificateAcceptance, EffectAuthorization, PersistedState]
-  quickCheck inconclusiveNeverAuthoritativeProperty
-  quickCheck proofGraphNodeVector
-  quickCheck proofGraphProvenanceVector
-  quickCheck proofGraphDuplicateVector
-  quickCheck growthBridgeCycleBasisVector
-  quickCheck growthBridgeRejectsDifferentModule
-  quickCheck growthBridgeRejectsCrossBasisComparison
-  quickCheck growthBridgeEmptyIdentityFailsClosed
-  quickCheck growthBridgeContractIsSemanticOnly
+  results <- traverse quickCheckResult properties
+  unless (all isSuccess results) exitFailure
+
+properties :: [Property]
+properties =
+  [ property identityProperty
+  , property compositionProperty
+  , normativeSemanticAuthorityProperty
+  , property advisoryNeverAuthoritativeProperty
+  ]
+    <> fmap
+      excludedAuthorityProperty
+      [MathematicalProof, CertificateAcceptance, EffectAuthorization, PersistedState]
+    <> [ property inconclusiveNeverAuthoritativeProperty
+       , proofGraphNodeVector
+       , proofGraphProvenanceVector
+       , proofGraphDuplicateVector
+       , growthBridgeCycleBasisVector
+       , growthBridgeRejectsDifferentModule
+       , growthBridgeRejectsCrossBasisComparison
+       , growthBridgeEmptyIdentityFailsClosed
+       , growthBridgeContractIsSemanticOnly
+       ]
