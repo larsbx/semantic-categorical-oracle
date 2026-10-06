@@ -122,7 +122,7 @@ files = []
 [[review]]
 candidate_id = "usul-argumentation-kernel"
 repository = "larsbx/usul-al-fiqh-deontic-circuits"
-revision = "a369d997c89291f7f8b1f1aa92b7ea4baa0cb69c"
+revision = "5258681a61914068c16392097959de145392343b"
 files = [
   { path = "formal/fixtures/grounded-v1.json", blob = "4a87cd721e7b4f128ff5815fc832a2dff074ac79" },
   { path = "formal/lean/Usul/Dung.lean", blob = "1c9a22307d573ac8a98a862170a6a7772f22e902" },
@@ -133,8 +133,10 @@ files = [
   { path = "formal/lean/Usul/Schema.lean", blob = "4a041c33019bd4f9fe1ea7e3913a045315dd9ab5" },
   { path = "formal/lean/Usul/Process.lean", blob = "209c64345fe33d1a430bd9888d1c14516e6c8ce2" },
   { path = "formal/lean/Usul/Qiyas.lean", blob = "a4661e445d660ec0fcad748a5ab00bef24a754e4" },
+  { path = "formal/lean/Usul/Jadal.lean", blob = "22f26847a56461c4c55ed4421008fba0ec7d2ceb" },
   { path = "formal/lean/Usul/Muamalat.lean", blob = "5919c15104bdd8b72c4b74290c6422fc51f9b695" },
   { path = "formal/lean/Usul/Kulliyyat.lean", blob = "35dd469db190109eb75f0c374456cda4592dc89f" },
-  { path = "corpus/proposals/sadi_qawaid.json", blob = "af65a286700818cdbbc7a5890b679fa5d635d777" },
-  { path = "corpus/review/sadi_interpretive_questions.json", blob = "18b5713fcd4a8badfebd56d7bd36f959513c49a2" },
+  { path = "corpus/proposals/sadi_qawaid.json", blob = "a4db99642fc266b7188a79b654ab6420d0cd4345" },
+  { path = "corpus/review/sadi_interpretive_questions.json", blob = "c3fc69a75dfbff5dadc44f3e0311922694ba55dd" },
+  { path = "corpus/citations/qiyas_principles.json", blob = "6f742d35083cf255a9382023538227fa40b5f7cd" },
 ]
