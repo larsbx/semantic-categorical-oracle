@@ -77,5 +77,19 @@ claim = "al-Saʿdī Q58 (a ruling defined through its ʿilla depends only on it,
 verdict_on_success = "law_holds_for_test_domain"
 proof_authority = false
 
+[[law]]
+id = "usul.sadi.muamalat-consistency-v1"
+status = "spike"
+claim = "al-Saʿdī Q13/Q36 (strict liability for destruction is exactly destruction without right) and Q42 as an instance of Q21 (a usufruct reservation is valid iff its uncertainty is not forbidden gharar), exhaustive. Mirrors Lean Usul.Muamalat.q13_q36_consistent and q42_instance_of_q21."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.sadi.kulliyyat-v1"
+status = "spike"
+claim = "al-Saʿdī Q29 (qualifiers only narrow an utterance), Q34 (Q33's best discharges a choice made for another) and Q48 (a more lenient custom preserves continuity), over generated inputs. Mirrors Lean Usul.Kulliyyat.q29_attach_narrows, q34_best_admissible and q48_custom_monotone."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
 [forbidden_verdicts]
 values = ["proved", "certificate_accepted", "deployment_authorized", "policy_satisfied"]

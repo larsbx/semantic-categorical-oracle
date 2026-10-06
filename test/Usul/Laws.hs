@@ -55,6 +55,18 @@ usulProperties =
   , ("usul.sadi.q59-q60-generality (Lean: q59_*, q60_markers_general)",
       forAllOf [minBound .. maxBound] $ \f -> forAllOf [minBound .. maxBound] $ \c ->
         isGeneral f c == (f /= Nakira || c `elem` [Negation, Prohibition, Condition]))
+  , ("usul.sadi.q13-q36-consistent (Lean: q13_q36_consistent)",
+      forAllOf [minBound .. maxBound] $ \p -> itlafLiable (withRight p) === (p == Benefit))
+  , ("usul.sadi.q42-instance-of-q21 (Lean: q42_instance_of_q21)",
+      forAllOf [minBound .. maxBound] $ \k -> forAllOf bools $ \kn ->
+        reservationValid k kn === not (ghararForbidden k (not kn)))
+  , ("usul.sadi.q29-qualifiers-narrow (Lean: q29_attach_narrows)", property $ \(x :: Int) (ms :: [Int]) m ->
+      let q d y = y `mod` (1 + abs d) == 0
+       in not (meaning even (map q (m : ms)) x) || meaning even (map q ms) x)
+  , ("usul.sadi.q48-custom-monotone (Lean: q48_custom_monotone)", property $ \(ts :: [Integer]) (NonNegative g) (NonNegative d) ->
+      not (continuous g ts) || continuous (g + d) ts)
+  , ("usul.sadi.q34-best-admissible (Lean: q34_best_admissible)", property $ \(xs :: [(Int, Integer)]) ->
+      maybe (null xs) (admissibleForOther snd xs) (best snd xs))
   , ("usul.hukm.sigma-involutive (Lean: sigma_involutive)", forHukm $ \h -> sigma (sigma h) === h)
   , ("usul.hukm.sigma-antitone (Lean: sigma_antitone)", forHukm2 $ \a b -> not (a <= b) || sigma b <= sigma a)
   , ("usul.hukm.sigma-fixed-iff-mubah (Lean: sigma_fixed_iff)", forHukm $ \h -> (sigma h == h) === (h == Mubah))
