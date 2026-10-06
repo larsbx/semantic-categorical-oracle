@@ -1,12 +1,13 @@
 -- | Advisory mirror of @Usul.Schema@ (Lean): the shapes under al-Saʿdī's readings.
 -- Only the computable schemata are mirrored (S2 priority, S4 closure over a finite
--- carrier, S7 merge representatives); their laws are checked in test/Usul/Laws.hs.
+-- carrier, S7 merge representatives, S8 optimality); their laws are checked in test/Usul/Laws.hs.
 module Oracle.Usul.Schema
   ( firstSome
   , resolveD
   , closure
   , reps
   , covers
+  , optimal
   ) where
 
 import Data.List (nub, sort)
@@ -35,3 +36,7 @@ reps r = foldr keep []
 -- | S7: every owed act is discharged by some performed one.
 covers :: (a -> a -> Bool) -> [a] -> [a] -> Bool
 covers r done owed = all (\o -> any (`r` o) done) owed
+
+-- | S8: @b@ is available and no option scores higher.
+optimal :: Eq a => (a -> Integer) -> [a] -> a -> Bool
+optimal key xs b = b `elem` xs && all (\y -> key y <= key b) xs

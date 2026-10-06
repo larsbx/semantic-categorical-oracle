@@ -88,6 +88,15 @@ usulProperties =
       let r a b = fst a `mod` 3 == fst b `mod` 3   -- same kind, any occasion
           rs = S.reps r xs
        in S.covers r rs xs && length rs <= length xs && all (`elem` xs) rs)
+  , ("usul.schema.s8-optimal (Lean: best_optimal, Optimal.key_unique, Optimal.restrict, Optimal.mono)", property $ \(xs :: [(Int, Integer)]) (ys :: [Bool]) ->
+      case best snd xs of
+        Nothing -> null xs
+        Just b ->
+          let others = [x | (x, keep) <- zip xs (ys ++ repeat True), keep || x == b]
+           in S.optimal snd xs b
+                && and [snd o == snd b | o <- xs, S.optimal snd xs o]
+                && S.optimal snd others b
+                && S.optimal ((* 2) . (+ 1) . snd) xs b)
   , ("usul.hukm.sigma-involutive (Lean: sigma_involutive)", forHukm $ \h -> sigma (sigma h) === h)
   , ("usul.hukm.sigma-antitone (Lean: sigma_antitone)", forHukm2 $ \a b -> not (a <= b) || sigma b <= sigma a)
   , ("usul.hukm.sigma-fixed-iff-mubah (Lean: sigma_fixed_iff)", forHukm $ \h -> (sigma h == h) === (h == Mubah))

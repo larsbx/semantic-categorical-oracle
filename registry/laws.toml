@@ -98,5 +98,12 @@ claim = "Usul schemata: S2 priority is a monoid homomorphism, conservative and n
 verdict_on_success = "law_holds_for_test_domain"
 proof_authority = false
 
+[[law]]
+id = "usul.schema.optimal-v1"
+status = "spike"
+claim = "Usul S8: Q33's best is optimal, optimal options share one key, removing other options never unseats the choice, and monotone re-scaling preserves it (generated inputs). Mirrors Lean Usul.Schema.best_optimal, Optimal.key_unique, Optimal.restrict, Optimal.mono."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
 [forbidden_verdicts]
 values = ["proved", "certificate_accepted", "deployment_authorized", "policy_satisfied"]
