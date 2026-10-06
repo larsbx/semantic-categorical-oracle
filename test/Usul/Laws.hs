@@ -5,6 +5,7 @@ module Usul.Laws (usulProperties) where
 import Data.List (isSubsequenceOf, sort)
 import Oracle.Usul.Argumentation
 import Oracle.Usul.Hukm
+import Oracle.Usul.Sadi
 import Oracle.Usul.Taarud
 import Test.QuickCheck
 import Usul.GroundedVectors (groundedVectors)
@@ -25,9 +26,36 @@ forHukm2 f = forHukm (forHukm . f)
 forAF :: Testable p => (AF -> p) -> Property
 forAF = forAllShow af show
 
+-- | Exhaustive over a small finite enumeration.
+forAllOf :: (Show a, Testable p) => [a] -> (a -> p) -> Property
+forAllOf xs f = conjoin [counterexample (show x) (f x) | x <- xs]
+
+bools :: [Bool]
+bools = [False, True]
+
 usulProperties :: [(String, Property)]
 usulProperties =
-  [ ("usul.hukm.sigma-involutive (Lean: sigma_involutive)", forHukm $ \h -> sigma (sigma h) === h)
+  [ ("usul.sadi.q04-no-wajib-with-inability (Lean: q04_no_wajib_with_inability)",
+      forAllOf bools $ \d -> forHukm $ \h -> operative False d h /= Wajib)
+  , ("usul.sadi.q04-no-haram-with-necessity (Lean: q04_no_haram_with_necessity)",
+      forAllOf bools $ \c -> forHukm $ \h -> operative c True h /= Haram)
+  , ("usul.sadi.q04-relief-never-binds (Lean: q04_relief_never_binds)",
+      forAllOf bools $ \c -> forAllOf bools $ \d -> forHukm $ \h -> not (binding (operative c d h)) || binding h)
+  , ("usul.sadi.q22-valid-iff-preserves-prohibition (Lean: q22_valid_iff_preserves_prohibition)",
+      forHukm2 $ \a b -> not (voids a b) == ((a == Haram) == (b == Haram)))
+  , ("usul.sadi.q33-higher-benefit (Lean: q33_higher_benefit)", property $ \(xs :: [(Int, Integer)]) ->
+      case best snd xs of
+        Nothing -> null xs
+        Just b -> b `elem` xs && all (\y -> snd y <= snd b) xs)
+  , ("usul.sadi.q33-lighter-harm (Lean: q33_lighter_harm)", property $ \(xs :: [(Int, Integer)]) ->
+      maybe (null xs) (\b -> all (\y -> snd b <= snd y) xs) (best (negate . snd) xs))
+  , ("usul.sadi.q58-factorisation (Lean: q58_factors)", property $ \(xs :: [(Int, Int)]) ->
+      -- a ruling defined through the ʿilla depends only on it
+      let ruling (_, f) = toEnum (f `mod` 5) :: Hukm in dependsOn xs ruling snd)
+  , ("usul.sadi.q59-q60-generality (Lean: q59_*, q60_markers_general)",
+      forAllOf [minBound .. maxBound] $ \f -> forAllOf [minBound .. maxBound] $ \c ->
+        isGeneral f c == (f /= Nakira || c `elem` [Negation, Prohibition, Condition]))
+  , ("usul.hukm.sigma-involutive (Lean: sigma_involutive)", forHukm $ \h -> sigma (sigma h) === h)
   , ("usul.hukm.sigma-antitone (Lean: sigma_antitone)", forHukm2 $ \a b -> not (a <= b) || sigma b <= sigma a)
   , ("usul.hukm.sigma-fixed-iff-mubah (Lean: sigma_fixed_iff)", forHukm $ \h -> (sigma h == h) === (h == Mubah))
   , ("usul.hukm.mode-binding-injective", forHukm2 $ \a b ->

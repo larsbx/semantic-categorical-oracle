@@ -19,6 +19,7 @@ library
       Oracle.Result
       Oracle.Usul.Argumentation
       Oracle.Usul.Hukm
+      Oracle.Usul.Sadi
       Oracle.Usul.Taarud
   build-depends:
       base >=4.17 && <5

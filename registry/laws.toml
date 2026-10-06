@@ -49,5 +49,33 @@ claim = "Conflict resolution tries jam, then naskh, then tarjih, and suspends ju
 verdict_on_success = "law_holds_for_test_domain"
 proof_authority = false
 
+[[law]]
+id = "usul.sadi.q04-capacity-necessity-v1"
+status = "spike"
+claim = "al-Saʿdī Q4: no operative obligation with inability, no operative prohibition with necessity, and relief never makes a status binding (exhaustive over Hukm × Bool²). Mirrors Lean Usul.Sadi.q04_*."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.sadi.q22-stipulation-validity-v1"
+status = "spike"
+claim = "al-Saʿdī Q22/23: a settlement or stipulation is valid iff it preserves prohibition status (exhaustive over Hukm²). Mirrors Lean Usul.Sadi.q22_valid_iff_preserves_prohibition."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.sadi.q33-crowding-v1"
+status = "spike"
+claim = "al-Saʿdī Q33: the chosen benefit is maximal and the chosen harm minimal over generated lists. Mirrors Lean Usul.Sadi.q33_higher_benefit and q33_lighter_harm."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.sadi.q58-q60-v1"
+status = "spike"
+claim = "al-Saʿdī Q58 (a ruling defined through its ʿilla depends only on it, over generated cases) and Q59/Q60 generality markers (exhaustive). Mirrors Lean Usul.Sadi.q58_factors, q59_*, q60_markers_general."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
 [forbidden_verdicts]
 values = ["proved", "certificate_accepted", "deployment_authorized", "policy_satisfied"]
