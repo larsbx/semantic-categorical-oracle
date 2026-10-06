@@ -6,6 +6,7 @@ import Data.List (isSubsequenceOf, sort)
 import Oracle.Usul.Argumentation
 import Oracle.Usul.Hukm
 import Oracle.Usul.Sadi
+import qualified Oracle.Usul.Schema as S
 import Oracle.Usul.Taarud
 import Test.QuickCheck
 import Usul.GroundedVectors (groundedVectors)
@@ -67,6 +68,26 @@ usulProperties =
       not (continuous g ts) || continuous (g + d) ts)
   , ("usul.sadi.q34-best-admissible (Lean: q34_best_admissible)", property $ \(xs :: [(Int, Integer)]) ->
       maybe (null xs) (admissibleForOther snd xs) (best snd xs))
+  , ("usul.schema.s2-first-monoid-hom (Lean: first_append)", property $ \(xs :: [Maybe Int]) ys ->
+      S.firstSome (xs ++ ys) === maybe (S.firstSome ys) Just (S.firstSome xs))
+  , ("usul.schema.s2-conservative (Lean: first_conservative)", property $ \(xs :: [Maybe Int]) ys ->
+      maybe True (\a -> S.firstSome (xs ++ ys) == Just a) (S.firstSome xs))
+  , ("usul.schema.s2-naturality (Lean: first_map, resolveD_map)", property $ \(xs :: [Maybe Int]) d ->
+      let f = (* 3) . (+ 1) in f (S.resolveD xs d) === S.resolveD (map (fmap f) xs) (f d))
+  , ("usul.schema.s2-taarud-is-priority (Lean: taarud_is_priority)", property $ \(j :: Maybe Int) n t ->
+      resolve (Conflict j n t) === S.resolveD [Jam <$> j, Naskh <$> n, Tarjih <$> t] Tawaqquf)
+  , ("usul.schema.s4-closure-laws (Lean: extensive, idem, mono, least)", property $ \(es :: [(Small Int, Small Int)]) (ss :: [Small Int]) extra ->
+      let step = [(getSmall a `mod` 8, getSmall b `mod` 8) | (a, b) <- es]
+          seed = map ((`mod` 8) . getSmall) ss
+          c = S.closure step seed
+       in all (`elem` c) seed
+            && S.closure step c == c
+            && all (`elem` S.closure step (getSmall extra `mod` 8 : seed)) c
+            && and [b `elem` c | (a, b) <- step, a `elem` c])
+  , ("usul.schema.s7-reps (Lean: reps_covers, reps_length_le, reps_sub)", property $ \(xs :: [(Small Int, Small Int)]) ->
+      let r a b = fst a `mod` 3 == fst b `mod` 3   -- same kind, any occasion
+          rs = S.reps r xs
+       in S.covers r rs xs && length rs <= length xs && all (`elem` xs) rs)
   , ("usul.hukm.sigma-involutive (Lean: sigma_involutive)", forHukm $ \h -> sigma (sigma h) === h)
   , ("usul.hukm.sigma-antitone (Lean: sigma_antitone)", forHukm2 $ \a b -> not (a <= b) || sigma b <= sigma a)
   , ("usul.hukm.sigma-fixed-iff-mubah (Lean: sigma_fixed_iff)", forHukm $ \h -> (sigma h == h) === (h == Mubah))

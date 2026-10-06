@@ -91,5 +91,12 @@ claim = "al-Saʿdī Q29 (qualifiers only narrow an utterance), Q34 (Q33's best d
 verdict_on_success = "law_holds_for_test_domain"
 proof_authority = false
 
+[[law]]
+id = "usul.schema.priority-closure-merge-v1"
+status = "spike"
+claim = "Usul schemata: S2 priority is a monoid homomorphism, conservative and natural, and taʿāruḍ resolution is an instance; S4 closure is extensive, idempotent, monotone in the seeds and closed under the step; S7 representatives cover what is owed, never exceed it and are drawn from it (generated inputs). Mirrors Lean Usul.Schema.first_append, first_conservative, first_map, taarud_is_priority, Closure.*, reps_*."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
 [forbidden_verdicts]
 values = ["proved", "certificate_accepted", "deployment_authorized", "policy_satisfied"]
