@@ -19,6 +19,7 @@ library
       Oracle.Result
       Oracle.Usul.Argumentation
       Oracle.Usul.Hukm
+      Oracle.Usul.Qiyas
       Oracle.Usul.Sadi
       Oracle.Usul.Schema
       Oracle.Usul.Taarud

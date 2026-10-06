@@ -105,5 +105,12 @@ claim = "Usul S8: Q33's best is optimal, optimal options share one key, removing
 verdict_on_success = "law_holds_for_test_domain"
 proof_authority = false
 
+[[law]]
+id = "usul.qiyas.masalik-qawadih-v1"
+status = "spike"
+claim = "Usul qiyās: naqḍ is the failure of ṭard and ʿadam al-taʾthīr the failure of ʿaks, dawarān is co-presence and co-absence on the given cases, takhṣīṣ by an impediment present in every counter-case removes the naqḍ, a naqḍ of the waṣf gives a kasr of any ḥikma it proxies, and sabr wa-taqsīm with the ʿilla among the candidates leaves only the ʿilla as sole survivor (generated inputs). Mirrors Lean Usul.Qiyas.naqd_iff_not_tard, adamTathir_iff_not_aks, dawaran_iff, takhsis_repairs, naqd_gives_kasr, sabr_sound."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
 [forbidden_verdicts]
 values = ["proved", "certificate_accepted", "deployment_authorized", "policy_satisfied"]

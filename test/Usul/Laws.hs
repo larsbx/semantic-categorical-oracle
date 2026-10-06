@@ -7,6 +7,7 @@ import Oracle.Usul.Argumentation
 import Oracle.Usul.Hukm
 import Oracle.Usul.Sadi
 import qualified Oracle.Usul.Schema as S
+import qualified Oracle.Usul.Qiyas as Q
 import Oracle.Usul.Taarud
 import Test.QuickCheck
 import Usul.GroundedVectors (groundedVectors)
@@ -97,6 +98,28 @@ usulProperties =
                 && and [snd o == snd b | o <- xs, S.optimal snd xs o]
                 && S.optimal snd others b
                 && S.optimal ((* 2) . (+ 1) . snd) xs b)
+  , ("usul.qiyas.naqd-and-adam-tathir (Lean: naqd_iff_not_tard, adamTathir_iff_not_aks, dawaran_iff)", property $ \(ks :: [(Int, Bool)]) (m :: Int) ->
+      let w x = x `mod` (2 + abs m `mod` 5) == 0
+       in Q.naqd w True ks == not (Q.tard w True ks)
+            && Q.adamTathir w True ks == not (Q.aks w True ks)
+            && Q.dawaran w True ks == all (\(x, b) -> w x == b) ks)
+  , ("usul.qiyas.takhsis-repairs (Lean: takhsis_repairs)", property $ \(ks :: [(Int, Bool)]) ->
+      -- restrict the ʿilla by an impediment present in exactly the counter-cases
+      let w x = even x
+          m x = any (\(y, b) -> y == x && w y && not b) ks
+       in not (Q.naqd (\x -> w x && not (m x)) True ks))
+  , ("usul.qiyas.kasr-from-naqd (Lean: naqd_gives_kasr)", property $ \(ks :: [(Int, Bool)]) ->
+      let w x = x `mod` 4 == 0
+          hikma x = even x   -- w implies hikma
+       in not (Q.naqd w True ks) || Q.naqd hikma True ks)
+  , ("usul.qiyas.sabr-sound (Lean: sabr_sound)", property $ \(ks :: [(Int, Bool)]) ->
+      -- candidates are moduli; the true ʿilla is the one the data were generated from
+      let illa = 3
+          known = [(x, x `mod` illa == 0) | (x, _) <- ks]
+          refuted k = not (Q.dawaran (\x -> x `mod` k == 0) True known)
+       in case Q.survivors refuted [2, 3, 5] of
+            [k] -> k == illa
+            _ -> True)
   , ("usul.hukm.sigma-involutive (Lean: sigma_involutive)", forHukm $ \h -> sigma (sigma h) === h)
   , ("usul.hukm.sigma-antitone (Lean: sigma_antitone)", forHukm2 $ \a b -> not (a <= b) || sigma b <= sigma a)
   , ("usul.hukm.sigma-fixed-iff-mubah (Lean: sigma_fixed_iff)", forHukm $ \h -> (sigma h == h) === (h == Mubah))
