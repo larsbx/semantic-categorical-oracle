@@ -166,6 +166,6 @@ classification = "authored_oracle"
 authority_mode = "advisory_oracle"
 authority_scope = "usul-hukm-argumentation-comparison-v1"
 authoritative_questions = []
-source_paths = ["formal/fixtures/grounded-v1.json", "formal/lean/Usul/Dung.lean", "formal/lean/Usul/Grounded.lean", "formal/lean/Usul/Hukm.lean", "formal/lean/Usul/Taarud.lean", "formal/lean/Usul/Sadi.lean", "corpus/proposals/sadi_qawaid.json"]
+source_paths = ["formal/fixtures/grounded-v1.json", "formal/lean/Usul/Dung.lean", "formal/lean/Usul/Grounded.lean", "formal/lean/Usul/Hukm.lean", "formal/lean/Usul/Taarud.lean", "formal/lean/Usul/Sadi.lean", "formal/lean/Usul/Muamalat.lean", "corpus/proposals/sadi_qawaid.json"]
 operational_authority = "usul-al-fiqh-deontic-circuits Lean kernel (proof authority) and its corpus review queue"
 allowed = true
