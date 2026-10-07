@@ -122,7 +122,7 @@ files = []
 [[review]]
 candidate_id = "usul-argumentation-kernel"
 repository = "larsbx/usul-al-fiqh-deontic-circuits"
-revision = "ee057bd4bca125b610f71bfc221a70322f02ce5d"
+revision = "bdb920669e8ef5033c218e886ddcaf8b3b39b292"
 files = [
   { path = "formal/fixtures/grounded-v1.json", blob = "4a87cd721e7b4f128ff5815fc832a2dff074ac79" },
   { path = "formal/lean/Usul/Dung.lean", blob = "1c9a22307d573ac8a98a862170a6a7772f22e902" },
@@ -136,13 +136,13 @@ files = [
   { path = "formal/lean/Usul/Jadal.lean", blob = "22f26847a56461c4c55ed4421008fba0ec7d2ceb" },
   { path = "formal/lean/Usul/QiyasLimits.lean", blob = "c8e8bbbc3823b62a84b94e305f89d4f63060b503" },
   { path = "formal/lean/Usul/Dalala.lean", blob = "32b11314e8c1e87afa7816f33b2809847c7c4b45" },
-  { path = "formal/lean/Usul/Refinements.lean", blob = "e9333fd8acd997c38208eaf1dc7eb5df423410e0" },
+  { path = "formal/lean/Usul/Refinements.lean", blob = "ab571908f6514d017ce443b1d67b4c3c4d0a062f" },
   { path = "formal/lean/Usul/Muamalat.lean", blob = "5919c15104bdd8b72c4b74290c6422fc51f9b695" },
   { path = "formal/lean/Usul/Kulliyyat.lean", blob = "35dd469db190109eb75f0c374456cda4592dc89f" },
-  { path = "corpus/proposals/sadi_qawaid.json", blob = "3c472edb9cddfb02e346d9d7a641652bc3d5bade" },
-  { path = "corpus/review/sadi_interpretive_questions.json", blob = "92b99f64a43c1a33dbf61a2f8872499fa76d2f69" },
+  { path = "corpus/proposals/sadi_qawaid.json", blob = "21dfc95a38451b41591573f6fb4630c8886d6255" },
+  { path = "corpus/review/sadi_interpretive_questions.json", blob = "1d2b4a361368be6d677f2b5476e7c3a522b68164" },
   { path = "corpus/citations/qiyas_principles.json", blob = "099ed0370fff5030c513ae7fc0f9f1934b65e350" },
   { path = "corpus/takhrij/report.json", blob = "4b68b52a77457af375ae8eebb46d012716955e7b" },
   { path = "corpus/dossier/refinements.json", blob = "d5fe5a8362ed30799fb57e9679f3f6afc970faed" },
-  { path = "corpus/dossier/glossary.json", blob = "31d6634cb7ce410ab05031fc840a6dd7c90bdf24" },
+  { path = "corpus/dossier/glossary.json", blob = "787b00813f431bca6eee6d0de41950e5be077f91" },
 ]
