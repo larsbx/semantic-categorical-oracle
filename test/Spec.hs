@@ -20,11 +20,16 @@ import Oracle.Result
   , OracleResult (..)
   , authoritativeFor
   )
+import Control.Monad (unless)
+import System.Exit (exitFailure)
 import Test.QuickCheck
   ( Property
+  , Testable
+  , isSuccess
+  , quickCheckResult
   , (===)
-  , quickCheck
   )
+import Usul.Laws (usulProperties)
 
 identityProperty :: [Int] -> Property
 identityProperty xs =
@@ -138,21 +143,35 @@ proofGraphDuplicateVector =
   aliasEdge =
     ProofEdge "synonymous" "PIP census" "Census" "theorem-backed" "aliases"
 
+-- | Run every property; exit non-zero if any fails (QuickCheck's 'quickCheck'
+-- alone always exits 0, so a failing law would not fail the suite).
+check :: Testable p => p -> IO Bool
+check = fmap isSuccess . quickCheckResult
+
 main :: IO ()
 main = do
-  quickCheck identityProperty
-  quickCheck compositionProperty
-  quickCheck normativeSemanticAuthorityProperty
-  quickCheck advisoryNeverAuthoritativeProperty
-  mapM_
-    (quickCheck . excludedAuthorityProperty)
-    [MathematicalProof, CertificateAcceptance, EffectAuthorization, PersistedState]
-  quickCheck inconclusiveNeverAuthoritativeProperty
-  quickCheck proofGraphNodeVector
-  quickCheck proofGraphProvenanceVector
-  quickCheck proofGraphDuplicateVector
-  quickCheck growthBridgeCycleBasisVector
-  quickCheck growthBridgeRejectsDifferentModule
-  quickCheck growthBridgeRejectsCrossBasisComparison
-  quickCheck growthBridgeEmptyIdentityFailsClosed
-  quickCheck growthBridgeContractIsSemanticOnly
+  results <-
+    sequence
+      [ check identityProperty
+      , check compositionProperty
+      , check normativeSemanticAuthorityProperty
+      , check advisoryNeverAuthoritativeProperty
+      ]
+  exclusions <-
+    mapM
+      (check . excludedAuthorityProperty)
+      [MathematicalProof, CertificateAcceptance, EffectAuthorization, PersistedState]
+  rest <-
+    sequence
+      [ check inconclusiveNeverAuthoritativeProperty
+      , check proofGraphNodeVector
+      , check proofGraphProvenanceVector
+      , check proofGraphDuplicateVector
+      , check growthBridgeCycleBasisVector
+      , check growthBridgeRejectsDifferentModule
+      , check growthBridgeRejectsCrossBasisComparison
+      , check growthBridgeEmptyIdentityFailsClosed
+      , check growthBridgeContractIsSemanticOnly
+      ]
+  usul <- mapM (\(name, p) -> putStrLn name >> check p) usulProperties
+  unless (and (results ++ exclusions ++ rest ++ usul)) exitFailure

@@ -14,5 +14,103 @@ claim = "Nested and composed evaluation agree over the supplied finite observati
 verdict_on_success = "law_holds_for_test_domain"
 proof_authority = false
 
+[[law]]
+id = "usul.hukm.sigma-involutive-v1"
+status = "spike"
+claim = "Omission status is an involution on the five taklifi statuses (exhaustive over Hukm). Mirrors Lean Usul.Hukm.σ_involutive."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.hukm.sigma-antitone-v1"
+status = "spike"
+claim = "Omission status reverses the valence order (exhaustive). Mirrors Lean Usul.Hukm.σ_antitone."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.af.grounded-least-complete-v1"
+status = "spike"
+claim = "The iterated grounded extension is conflict-free, complete, and contained in every complete extension, over generated AFs with at most 6 arguments. Mirrors Lean Usul.Dung.approx_admissible and approx_sub_complete."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.af.grounded-vectors-v1"
+status = "spike"
+claim = "The Haskell grounded extension agrees with the canonical vectors in usul-al-fiqh-deontic-circuits formal/fixtures/grounded-v1.json, which the Lean build also checks."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.taarud.resolution-order-v1"
+status = "spike"
+claim = "Conflict resolution tries jam, then naskh, then tarjih, and suspends judgement (tawaqquf) exactly when all three fail. Mirrors Lean Usul.resolve_tawaqquf_iff."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.sadi.q04-capacity-necessity-v1"
+status = "spike"
+claim = "al-Saʿdī Q4: no operative obligation with inability, no operative prohibition with necessity, and relief never makes a status binding (exhaustive over Hukm × Bool²). Mirrors Lean Usul.Sadi.q04_*."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.sadi.q22-stipulation-validity-v1"
+status = "spike"
+claim = "al-Saʿdī Q22/23: a settlement or stipulation is valid iff it preserves prohibition status (exhaustive over Hukm²). Mirrors Lean Usul.Sadi.q22_valid_iff_preserves_prohibition."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.sadi.q33-crowding-v1"
+status = "spike"
+claim = "al-Saʿdī Q33: the chosen benefit is maximal and the chosen harm minimal over generated lists. Mirrors Lean Usul.Sadi.q33_higher_benefit and q33_lighter_harm."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.sadi.q58-q60-v1"
+status = "spike"
+claim = "al-Saʿdī Q58 (a ruling defined through its ʿilla depends only on it, over generated cases) and Q59/Q60 generality markers (exhaustive). Mirrors Lean Usul.Sadi.q58_factors, q59_*, q60_markers_general."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.sadi.muamalat-consistency-v1"
+status = "spike"
+claim = "al-Saʿdī Q13/Q36 (strict liability for destruction is exactly destruction without right) and Q42 as an instance of Q21 (a usufruct reservation is valid iff its uncertainty is not forbidden gharar), exhaustive. Mirrors Lean Usul.Muamalat.q13_q36_consistent and q42_instance_of_q21."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.sadi.kulliyyat-v1"
+status = "spike"
+claim = "al-Saʿdī Q29 (qualifiers only narrow an utterance), Q34 (Q33's best discharges a choice made for another) and Q48 (a more lenient custom preserves continuity), over generated inputs. Mirrors Lean Usul.Kulliyyat.q29_attach_narrows, q34_best_admissible and q48_custom_monotone."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.schema.priority-closure-merge-v1"
+status = "spike"
+claim = "Usul schemata: S2 priority is a monoid homomorphism, conservative and natural, and taʿāruḍ resolution is an instance; S4 closure is extensive, idempotent, monotone in the seeds and closed under the step; S7 representatives cover what is owed, never exceed it and are drawn from it (generated inputs). Mirrors Lean Usul.Schema.first_append, first_conservative, first_map, taarud_is_priority, Closure.*, reps_*."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.schema.optimal-v1"
+status = "spike"
+claim = "Usul S8: Q33's best is optimal, optimal options share one key, removing other options never unseats the choice, and monotone re-scaling preserves it (generated inputs). Mirrors Lean Usul.Schema.best_optimal, Optimal.key_unique, Optimal.restrict, Optimal.mono."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "usul.qiyas.masalik-qawadih-v1"
+status = "spike"
+claim = "Usul qiyās: naqḍ is the failure of ṭard and ʿadam al-taʾthīr the failure of ʿaks, dawarān is co-presence and co-absence on the given cases, takhṣīṣ by an impediment present in every counter-case removes the naqḍ, a naqḍ of the waṣf gives a kasr of any ḥikma it proxies, and sabr wa-taqsīm with the ʿilla among the candidates leaves only the ʿilla as sole survivor (generated inputs). Mirrors Lean Usul.Qiyas.naqd_iff_not_tard, adamTathir_iff_not_aks, dawaran_iff, takhsis_repairs, naqd_gives_kasr, sabr_sound."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
 [forbidden_verdicts]
 values = ["proved", "certificate_accepted", "deployment_authorized", "policy_satisfied"]

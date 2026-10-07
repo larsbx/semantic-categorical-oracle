@@ -118,3 +118,31 @@ candidate_id = "icm-hub-event-replay"
 repository = "larsbx/icm-hub"
 revision = "5bd837874f5450df9bf30f917db7520a1e9fc446"
 files = []
+
+[[review]]
+candidate_id = "usul-argumentation-kernel"
+repository = "larsbx/usul-al-fiqh-deontic-circuits"
+revision = "9f470a661070c9c57bd478118ef829b597b6c462"
+files = [
+  { path = "formal/fixtures/grounded-v1.json", blob = "4a87cd721e7b4f128ff5815fc832a2dff074ac79" },
+  { path = "formal/lean/Usul/Dung.lean", blob = "1c9a22307d573ac8a98a862170a6a7772f22e902" },
+  { path = "formal/lean/Usul/Grounded.lean", blob = "3141db97e19719a265cf5b443003fd3415a078b0" },
+  { path = "formal/lean/Usul/Hukm.lean", blob = "32adea2b9b11d1420b7d6eb6b5d34b2b40bf909d" },
+  { path = "formal/lean/Usul/Taarud.lean", blob = "18e645aa1a7fa30b64b9727f2dc0e3d0212dba30" },
+  { path = "formal/lean/Usul/Sadi.lean", blob = "32eb1735246e62dc1eb5f2e6f03931f2e8bed7fc" },
+  { path = "formal/lean/Usul/Schema.lean", blob = "743896ec622e22b3890f204694f1a04784278f52" },
+  { path = "formal/lean/Usul/Process.lean", blob = "209c64345fe33d1a430bd9888d1c14516e6c8ce2" },
+  { path = "formal/lean/Usul/Qiyas.lean", blob = "a4661e445d660ec0fcad748a5ab00bef24a754e4" },
+  { path = "formal/lean/Usul/Jadal.lean", blob = "22f26847a56461c4c55ed4421008fba0ec7d2ceb" },
+  { path = "formal/lean/Usul/QiyasLimits.lean", blob = "c8e8bbbc3823b62a84b94e305f89d4f63060b503" },
+  { path = "formal/lean/Usul/Dalala.lean", blob = "32b11314e8c1e87afa7816f33b2809847c7c4b45" },
+  { path = "formal/lean/Usul/Refinements.lean", blob = "88027e777321a27f6962a2a7d94b7046369b1951" },
+  { path = "formal/lean/Usul/Muamalat.lean", blob = "5919c15104bdd8b72c4b74290c6422fc51f9b695" },
+  { path = "formal/lean/Usul/Kulliyyat.lean", blob = "35dd469db190109eb75f0c374456cda4592dc89f" },
+  { path = "corpus/proposals/sadi_qawaid.json", blob = "21dfc95a38451b41591573f6fb4630c8886d6255" },
+  { path = "corpus/review/sadi_interpretive_questions.json", blob = "8dc39517f37d032b1ecdd52730400ec38e1e4eec" },
+  { path = "corpus/citations/qiyas_principles.json", blob = "099ed0370fff5030c513ae7fc0f9f1934b65e350" },
+  { path = "corpus/takhrij/report.json", blob = "4b68b52a77457af375ae8eebb46d012716955e7b" },
+  { path = "corpus/dossier/refinements.json", blob = "d5fe5a8362ed30799fb57e9679f3f6afc970faed" },
+  { path = "corpus/dossier/glossary.json", blob = "1ed4835c914522a630f847590c12560fd7263348" },
+]

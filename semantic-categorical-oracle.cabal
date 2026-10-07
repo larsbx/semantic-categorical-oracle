@@ -17,6 +17,12 @@ library
       Oracle.GrowthBridge
       Oracle.ProofGraph
       Oracle.Result
+      Oracle.Usul.Argumentation
+      Oracle.Usul.Hukm
+      Oracle.Usul.Qiyas
+      Oracle.Usul.Sadi
+      Oracle.Usul.Schema
+      Oracle.Usul.Taarud
   build-depends:
       base >=4.17 && <5
 
@@ -33,6 +39,9 @@ test-suite laws
   type: exitcode-stdio-1.0
   hs-source-dirs: test
   main-is: Spec.hs
+  other-modules:
+      Usul.GroundedVectors
+      Usul.Laws
   build-depends:
       base >=4.17 && <5,
       QuickCheck >=2.14 && <2.16,
