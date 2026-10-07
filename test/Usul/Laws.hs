@@ -37,7 +37,9 @@ bools = [False, True]
 
 usulProperties :: [(String, Property)]
 usulProperties =
-  [ ("usul.sadi.q04-no-wajib-with-inability (Lean: q04_no_wajib_with_inability)",
+  [ ("usul.dung.extensions-are-sets (Lean: Usul.Dung, sets of arguments)",
+      forAF $ \a -> all (\s -> complete a (s ++ s) == complete a s) (subsets a))
+  , ("usul.sadi.q04-no-wajib-with-inability (Lean: q04_no_wajib_with_inability)",
       forAllOf bools $ \d -> forHukm $ \h -> operative False d h /= Wajib)
   , ("usul.sadi.q04-no-haram-with-necessity (Lean: q04_no_haram_with_necessity)",
       forAllOf bools $ \c -> forHukm $ \h -> operative c True h /= Haram)

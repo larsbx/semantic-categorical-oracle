@@ -10,7 +10,7 @@ module Oracle.Usul.Argumentation
   , subsets
   ) where
 
-import Data.List (sort, subsequences)
+import Data.List (nub, sort, subsequences)
 
 data AF = AF {afSize :: Int, afAttacks :: [(Int, Int)]}
   deriving (Eq, Show)
@@ -29,8 +29,9 @@ conflictFree af s = null [() | (a, b) <- afAttacks af, a `elem` s, b `elem` s]
 admissible :: AF -> [Int] -> Bool
 admissible af s = conflictFree af s && all (`elem` characteristic af s) s
 
+-- | Extensions are sets: duplicate entries in @s@ are ignored.
 complete :: AF -> [Int] -> Bool
-complete af s = admissible af s && sort (characteristic af s) == sort s
+complete af s = admissible af s && sort (characteristic af s) == sort (nub s)
 
 -- | Least fixed point of 'characteristic', by iteration from the empty set.
 grounded :: AF -> [Int]
