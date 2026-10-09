@@ -129,7 +129,7 @@ proof_authority = false
 [[law]]
 id = "concept.filter.quarantine-sound-v1"
 status = "spike"
-claim = "No admitted concept is an endpoint of a conflict (incompatible relations on one pair, over the transitive closure, including synonym collapse), retained assertions stay within the admitted set, and the filter is idempotent on its own output (generated graphs)."
+claim = "No admitted concept is an endpoint of a conflict (incompatible relations on one pair, over the transitive closure, including synonym collapse), retained assertions stay within the admitted set and are transitively closed, and the filter is idempotent on its own output (generated graphs)."
 verdict_on_success = "law_holds_for_test_domain"
 proof_authority = false
 

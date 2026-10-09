@@ -24,12 +24,14 @@ filter   : Policy → R → A → Admission
 4. **saturate** transitive relations (`→`, `⊆`) to a fixpoint, certainty `min`;
 5. **detect** conflicts: incompatible relations on one unordered pair, where
    `incompatible = {(⊥,→), (⊥,≡), (≡,≠)}` and collapsing a class counts as `≡`;
-6. **quarantine** every class touching a conflict. The filter never picks a side.
+6. **quarantine** every class touching a conflict. The filter never picks a side;
+7. **retain** the saturated assertions among admitted classes, so downstream
+   oracles receive derived links too (note `"derived"`, certainty = weakest premise).
 
 Laws (`test/Concept/Laws.hs`, registered in `registry/laws.toml`): normal form
 is idempotent and order/orientation invariant; saturation is a fixpoint; no
 admitted concept lies in a conflict; retained assertions stay inside the
-admitted set; and the filter is idempotent on its own output.
+admitted set and are transitively closed; and the filter is idempotent on its own output.
 
 ## What was not migrated
 

@@ -112,6 +112,15 @@ conceptProperties =
       let a = filterConcepts defaultPolicy ["p", "q", "r"]
                 [rel "p" Implicative "q" 0.9, rel "q" Implicative "r" 0.9, rel "r" Contradictory "p" 0.9]
        in (admitted a, quarantined a, retained a) === ([concept "q"], map concept ["p", "r"], []))
+  , ("concept.filter.retains-derived-links",
+      let a = filterConcepts defaultPolicy ["p", "q", "r"]
+                [rel "p" Implicative "q" 0.9, rel "q" Implicative "r" 0.6]
+       in retained a
+            === [ rel "p" Implicative "q" 0.9
+                , (rel "p" Implicative "r" 0.6) {assertionNote = "derived"}
+                , rel "q" Implicative "r" 0.6 ])
+  , ("concept.filter.retained-closed", forGraph $ \xs ->
+      let ys = retained (admit xs) in saturate ys === ys)
   , ("concept.filter.foreign-endpoints-discarded",
       retained (filterConcepts defaultPolicy ["a"] [rel "a" Causal "b" 1]) === [])
   ]

@@ -32,7 +32,8 @@ data Conflict = Conflict
   deriving (Eq, Ord, Show)
 
 -- | The pre-oracle concept set. Every concept that took part in a conflict is
--- quarantined rather than resolved: the filter never picks a side.
+-- quarantined rather than resolved: the filter never picks a side. 'retained'
+-- is transitively closed; derived assertions carry the note @"derived"@.
 data Admission = Admission
   { admitted :: [Concept]
   , aliases :: [(Concept, Concept)]
@@ -51,7 +52,7 @@ filterConcepts policy raws claims =
   Admission
     { admitted = filter (`notElem` blocked) classes
     , aliases = [(c, canon c) | c <- concepts, canon c /= c]
-    , retained = [a | a <- graph, all (`notElem` blocked) (pair a)]
+    , retained = [a | a <- closed, all (`notElem` blocked) (pair a)]
     , conflicts = found
     , quarantined = blocked
     , invalid = rejected
