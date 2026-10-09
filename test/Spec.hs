@@ -29,6 +29,7 @@ import Test.QuickCheck
   , quickCheckResult
   , (===)
   )
+import Concept.Laws (conceptProperties)
 import Usul.Laws (usulProperties)
 
 identityProperty :: [Int] -> Property
@@ -173,5 +174,7 @@ main = do
       , check growthBridgeEmptyIdentityFailsClosed
       , check growthBridgeContractIsSemanticOnly
       ]
-  usul <- mapM (\(name, p) -> putStrLn name >> check p) usulProperties
-  unless (and (results ++ exclusions ++ rest ++ usul)) exitFailure
+  let named = mapM (\(name, p) -> putStrLn name >> check p)
+  usul <- named usulProperties
+  concepts <- named conceptProperties
+  unless (and (results ++ exclusions ++ rest ++ usul ++ concepts)) exitFailure

@@ -14,6 +14,10 @@ library
   hs-source-dirs: src
   exposed-modules:
       Oracle.Category
+      Oracle.Concept.Assertion
+      Oracle.Concept.Filter
+      Oracle.Concept.Relation
+      Oracle.Concept.Validate
       Oracle.GrowthBridge
       Oracle.ProofGraph
       Oracle.Result
@@ -40,6 +44,7 @@ test-suite laws
   hs-source-dirs: test
   main-is: Spec.hs
   other-modules:
+      Concept.Laws
       Usul.GroundedVectors
       Usul.Laws
   build-depends:
