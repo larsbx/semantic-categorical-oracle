@@ -122,7 +122,7 @@ files = []
 [[review]]
 candidate_id = "usul-argumentation-kernel"
 repository = "larsbx/usul-al-fiqh-deontic-circuits"
-revision = "861de806496d9a7e35138bbc7779d79af913e475"
+revision = "3ca9fd9c0954eaad30517ab61dfb13417756ccd8"
 files = [
   { path = "formal/fixtures/grounded-v1.json", blob = "4a87cd721e7b4f128ff5815fc832a2dff074ac79" },
   { path = "formal/lean/Usul/Dung.lean", blob = "1c9a22307d573ac8a98a862170a6a7772f22e902" },
@@ -137,14 +137,14 @@ files = [
   { path = "formal/lean/Usul/Jadal.lean", blob = "22f26847a56461c4c55ed4421008fba0ec7d2ceb" },
   { path = "formal/lean/Usul/QiyasLimits.lean", blob = "c8e8bbbc3823b62a84b94e305f89d4f63060b503" },
   { path = "formal/lean/Usul/Dalala.lean", blob = "32b11314e8c1e87afa7816f33b2809847c7c4b45" },
-  { path = "formal/lean/Usul/Refinements.lean", blob = "9a2a750554b2eb9be87dbf821fe9a50806456088" },
+  { path = "formal/lean/Usul/Refinements.lean", blob = "0b8f461a876301f33f20b0b7ef6a9d8bef866f72" },
   { path = "formal/lean/Usul/Muamalat.lean", blob = "5919c15104bdd8b72c4b74290c6422fc51f9b695" },
   { path = "formal/lean/Usul/Kulliyyat.lean", blob = "35dd469db190109eb75f0c374456cda4592dc89f" },
   { path = "corpus/proposals/sadi_qawaid.json", blob = "b7e78a2235b06189b064f650059648d6f2697d45" },
   { path = "corpus/review/sadi_interpretive_questions.json", blob = "fb76111bcef628413ded9ebb8c1b02c1fd84dd82" },
   { path = "corpus/citations/qiyas_principles.json", blob = "099ed0370fff5030c513ae7fc0f9f1934b65e350" },
-  { path = "corpus/takhrij/report.json", blob = "3cb1ffe597daa646f878cb565ef712d4a1faaed5" },
-  { path = "corpus/reconciliation/report.json", blob = "c4d33deaeb7e0fa2b82e03ccd7ef7350528582ff" },
+  { path = "corpus/takhrij/report.json", blob = "a75d83a814080b824bdc2787b1d71a60ccd82a28" },
+  { path = "corpus/reconciliation/report.json", blob = "9fc4192c355598340f542e8cdda6e24e0a5e9620" },
   { path = "corpus/dossier/refinements.json", blob = "58e43875679047de54fe572ecdd87a87ece079af" },
   { path = "corpus/dossier/glossary.json", blob = "c57e2be62df60ff55d1b44d2e816d65a4f8d6753" },
 ]
