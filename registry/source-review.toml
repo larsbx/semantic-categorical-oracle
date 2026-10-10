@@ -122,7 +122,7 @@ files = []
 [[review]]
 candidate_id = "usul-argumentation-kernel"
 repository = "larsbx/usul-al-fiqh-deontic-circuits"
-revision = "b3c6937fda76513279c7c075d1322ceda7838bbe"
+revision = "0c7169531f188c4836aea360cb84ec2e180a6fa1"
 files = [
   { path = "formal/fixtures/grounded-v1.json", blob = "4a87cd721e7b4f128ff5815fc832a2dff074ac79" },
   { path = "formal/lean/Usul/Dung.lean", blob = "1c9a22307d573ac8a98a862170a6a7772f22e902" },
@@ -137,15 +137,15 @@ files = [
   { path = "formal/lean/Usul/Jadal.lean", blob = "22f26847a56461c4c55ed4421008fba0ec7d2ceb" },
   { path = "formal/lean/Usul/QiyasLimits.lean", blob = "c8e8bbbc3823b62a84b94e305f89d4f63060b503" },
   { path = "formal/lean/Usul/Dalala.lean", blob = "32b11314e8c1e87afa7816f33b2809847c7c4b45" },
-  { path = "formal/lean/Usul/Refinements.lean", blob = "58034f1f0a4b37d490ae5157e6756a3d705e4447" },
+  { path = "formal/lean/Usul/Refinements.lean", blob = "572f132d8b99d5e0f397a7c10c484ff34db7d476" },
   { path = "formal/lean/Usul/Muamalat.lean", blob = "5919c15104bdd8b72c4b74290c6422fc51f9b695" },
   { path = "formal/lean/Usul/Kulliyyat.lean", blob = "35dd469db190109eb75f0c374456cda4592dc89f" },
   { path = "corpus/proposals/sadi_qawaid.json", blob = "b7e78a2235b06189b064f650059648d6f2697d45" },
   { path = "corpus/review/sadi_interpretive_questions.json", blob = "fb76111bcef628413ded9ebb8c1b02c1fd84dd82" },
   { path = "corpus/citations/qiyas_principles.json", blob = "099ed0370fff5030c513ae7fc0f9f1934b65e350" },
-  { path = "corpus/takhrij/report.json", blob = "551e0ed173590e6f05112eb2e640f7dd00cbbae8" },
-  { path = "corpus/reconciliation/report.json", blob = "2ce0f1f979b8dcbe06d364d4ac324147b66e2e10" },
-  { path = "corpus/dossier/refinements.json", blob = "40a21397ec56e0ced14bd887d7fcbb3cae68d495" },
+  { path = "corpus/takhrij/report.json", blob = "b5009cf77810066adf060fb4172f8aee89846c8d" },
+  { path = "corpus/reconciliation/report.json", blob = "e559a743c7c28fb444de85b8a8dd6dec4d3844ce" },
+  { path = "corpus/dossier/refinements.json", blob = "58e43875679047de54fe572ecdd87a87ece079af" },
   { path = "corpus/dossier/glossary.json", blob = "c57e2be62df60ff55d1b44d2e816d65a4f8d6753" },
 ]
 
