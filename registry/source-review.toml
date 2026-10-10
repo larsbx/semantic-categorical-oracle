@@ -122,7 +122,7 @@ files = []
 [[review]]
 candidate_id = "usul-argumentation-kernel"
 repository = "larsbx/usul-al-fiqh-deontic-circuits"
-revision = "19d0c9f84a100a17aaaeb955effbe144ebfc22ee"
+revision = "30db5c5376110e2b86bedd7206c06ff644027fa2"
 files = [
   { path = "formal/fixtures/grounded-v1.json", blob = "4a87cd721e7b4f128ff5815fc832a2dff074ac79" },
   { path = "formal/lean/Usul/Dung.lean", blob = "1c9a22307d573ac8a98a862170a6a7772f22e902" },
@@ -144,7 +144,7 @@ files = [
   { path = "corpus/review/sadi_interpretive_questions.json", blob = "fb76111bcef628413ded9ebb8c1b02c1fd84dd82" },
   { path = "corpus/citations/qiyas_principles.json", blob = "099ed0370fff5030c513ae7fc0f9f1934b65e350" },
   { path = "corpus/takhrij/report.json", blob = "2504b95704b21e3b5e78c548990fbce1bd7e28a2" },
-  { path = "corpus/reconciliation/report.json", blob = "9d8d963b3fae90b6aa88d446b0f80a5db6e0b5dd" },
+  { path = "corpus/reconciliation/report.json", blob = "7830de4170e10c1f727fad725e1e47205d3875ef" },
   { path = "corpus/dossier/refinements.json", blob = "11dea0fcf730aafa33c9d157a5b9dbe44e3cdcbd" },
   { path = "corpus/dossier/glossary.json", blob = "c57e2be62df60ff55d1b44d2e816d65a4f8d6753" },
 ]
