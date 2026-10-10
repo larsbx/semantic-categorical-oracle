@@ -112,5 +112,26 @@ claim = "Usul qiyās: naqḍ is the failure of ṭard and ʿadam al-taʾthīr th
 verdict_on_success = "law_holds_for_test_domain"
 proof_authority = false
 
+[[law]]
+id = "concept.normalize.canonical-v1"
+status = "spike"
+claim = "Assertion normal form is idempotent, invariant under input order and symmetric-relation orientation, drops self-loops, and keeps the highest certainty per (source, target, relation). Mirrors tui-story edge.ex duplicate rule and SemanticGraphConstraints.tla edge uniqueness."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "concept.saturate.fixpoint-v1"
+status = "spike"
+claim = "Transitive saturation (min certainty) is a fixpoint over generated graphs on a five-concept universe."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
+id = "concept.filter.quarantine-sound-v1"
+status = "spike"
+claim = "No admitted concept is an endpoint of a conflict (incompatible relations on one pair, over the transitive closure, including synonym collapse), retained assertions stay within the admitted set and are transitively closed, and the filter is idempotent on its own output (generated graphs)."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
 [forbidden_verdicts]
 values = ["proved", "certificate_accepted", "deployment_authorized", "policy_satisfied"]

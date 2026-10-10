@@ -146,3 +146,16 @@ files = [
   { path = "corpus/dossier/refinements.json", blob = "45b82f22a1373cd7b5b42c109b89686db5f7fba3" },
   { path = "corpus/dossier/glossary.json", blob = "c57e2be62df60ff55d1b44d2e816d65a4f8d6753" },
 ]
+
+[[review]]
+candidate_id = "tui-story-concept-filter"
+repository = "larsbx/tui-story"
+revision = "2161f5de022d9db59551dac2f1f32f758b5e6ff3"
+files = [
+  { path = "semantic_graph/lib/semantic_graph/resources/edge.ex", blob = "72c7e9ed1208ca433f9ec5982564ed501a5493cb" },
+  { path = "semantic_graph/lib/semantic_graph/analysis/service.ex", blob = "c518a5c3ff89da6648fd9a59afbb21d634097c8c" },
+  { path = "semantic_graph/lib/semantic_graph/llm/client.ex", blob = "e0090dbaed01336207219c016f8b3c0a3df368c1" },
+  { path = "specs/SemanticGraphConstraints.tla", blob = "2affc53299f2bf58fda7db546b078411d25e9a76" },
+  { path = "specs/ValidationLayer.tla", blob = "2de94bab5fdb6ca9448ab9c5e28d8ec6f115d259" },
+  { path = "specs/SEMANTIC_ANALYSIS.md", blob = "ede271869902cc8dbef278733fb6dc23dc947cbb" },
+]
