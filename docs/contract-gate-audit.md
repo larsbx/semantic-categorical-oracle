@@ -52,3 +52,19 @@ The property suite exercises the three domain-owned vectors:
 
 GitHub-hosted CI remains an advisory mirror gate. Canonical source/merge and CI
 remain Forgejo and Woodpecker where applicable.
+
+## Usul lane-D integration (2026-10-11)
+
+The advisory usul dependency is pinned to merged PR #62 revision
+`8cd49f89389823a20b9c622891bd00250e42072d`, replacing the temporary unmerged head.
+All 28 usul paths were checked against that revision’s Git tree. The corrected
+reconciliation report blob is pinned together with the previously omitted
+ledger, contradiction validator, schema, six-case acceptance audit and
+qualified-evidence archive. The inventory and review registry agree on all
+65 pinned paths across 15 candidates and retain five normative boundaries.
+
+The domain retains 162 entries, 414 active evidence items and 73 residues.
+Two qualified passages remain in the archive rather than active grading.
+All six discrepancies remain candidate interpretations, including the recorded
+owner-knownness, theft-category and bequest-qarina scope limitations. This
+repin does not grant the Haskell mirror scholarly or proof authority.
