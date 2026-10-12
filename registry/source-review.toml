@@ -122,7 +122,7 @@ files = []
 [[review]]
 candidate_id = "usul-argumentation-kernel"
 repository = "larsbx/usul-al-fiqh-deontic-circuits"
-revision = "4a9d9b2f262efd87193a7a4617b2307938c11ab8"
+revision = "b796eb5d782e43e57c47c6fa14c37e6cc94dd279"
 files = [
   { path = "formal/fixtures/grounded-v1.json", blob = "4a87cd721e7b4f128ff5815fc832a2dff074ac79" },
   { path = "formal/fixtures/grounded-stress-v1.json", blob = "23baa0f2702c00664855bcc001607484e6b666a9" },
