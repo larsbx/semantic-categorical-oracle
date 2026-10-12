@@ -43,6 +43,13 @@ verdict_on_success = "law_holds_for_test_domain"
 proof_authority = false
 
 [[law]]
+id = "usul.af.grounded-stress-v1"
+status = "spike"
+claim = "The Haskell grounded extension reproduces the digest of 10^4 AFs regenerated from the seeded LCG in usul-al-fiqh-deontic-circuits formal/fixtures/grounded-stress-v1.json, which the Python reference and the Lean build (UsulTest.GroundedStress) also reproduce: the roadmap's M5 differential exit."
+verdict_on_success = "law_holds_for_test_domain"
+proof_authority = false
+
+[[law]]
 id = "usul.taarud.resolution-order-v1"
 status = "spike"
 claim = "Conflict resolution tries jam, then naskh, then tarjih, and suspends judgement (tawaqquf) exactly when all three fail. Mirrors Lean Usul.resolve_tawaqquf_iff."

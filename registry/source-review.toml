@@ -122,9 +122,12 @@ files = []
 [[review]]
 candidate_id = "usul-argumentation-kernel"
 repository = "larsbx/usul-al-fiqh-deontic-circuits"
-revision = "8cd49f89389823a20b9c622891bd00250e42072d"
+revision = "07668d0d95df5dd00c89dff3965654d4564f62dc"
 files = [
   { path = "formal/fixtures/grounded-v1.json", blob = "4a87cd721e7b4f128ff5815fc832a2dff074ac79" },
+  { path = "formal/fixtures/grounded-stress-v1.json", blob = "23baa0f2702c00664855bcc001607484e6b666a9" },
+  { path = "formal/lean/UsulTest/GroundedStress.lean", blob = "554235d639fb44605272d9976d493de7b4961bcc" },
+  { path = "formal/fixtures/gen_grounded.py", blob = "abd3d4cc4e88fe939ba90494ca05924694742555" },
   { path = "formal/lean/Usul/Dung.lean", blob = "1c9a22307d573ac8a98a862170a6a7772f22e902" },
   { path = "formal/lean/Usul/Grounded.lean", blob = "3141db97e19719a265cf5b443003fd3415a078b0" },
   { path = "formal/lean/Usul/Hukm.lean", blob = "32adea2b9b11d1420b7d6eb6b5d34b2b40bf909d" },
