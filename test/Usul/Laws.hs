@@ -10,13 +10,38 @@ import qualified Oracle.Usul.Schema as S
 import qualified Oracle.Usul.Qiyas as Q
 import Oracle.Usul.Taarud
 import Test.QuickCheck
-import Usul.GroundedVectors (groundedVectors)
+import Usul.GroundedVectors (groundedStress, groundedVectors)
 
 -- | Small frameworks: brute force over all 2^n subsets stays cheap.
 af :: Gen AF
 af = do
   n <- chooseInt (0, 6)
   AF n <$> sublistOf [(a, b) | a <- [0 .. n - 1], b <- [0 .. n - 1]]
+
+-- | The M5 differential exit: the AFs regenerated from the seeded MMIX LCG of
+-- @gen_grounded.stress_afs@, n = 1 + r mod nMax and each ordered pair attacking iff r mod den < num,
+-- r the high 31 bits of the next state.
+stressAFs :: (Integer, Int, Int, Integer, Integer) -> [AF]
+stressAFs (seed, count, nMax, num, den) = take count (go seed)
+ where
+  next x = (6364136223846793005 * x + 1442695040888963407) `mod` (2 ^ (64 :: Int))
+  draw x = let x' = next x in (x' `div` (2 ^ (33 :: Int)), x')
+  go x =
+    let (r, x1) = draw x
+        n = 1 + fromInteger (r `mod` toInteger nMax)
+        pairs = [(a, b) | a <- [0 .. n - 1], b <- [0 .. n - 1]]
+        (att, x2) = foldl (\(acc, y) e -> let (r', y') = draw y in (if r' `mod` den < num then acc ++ [e] else acc, y')) ([], x1) pairs
+     in AF n att : go x2
+
+-- | (fingerprint, non-empty, members) over the grounded extensions, as in @gen_grounded.stress_digest@.
+stressDigest :: [AF] -> (Integer, Int, Int)
+stressDigest = foldl step (0, 0, 0)
+ where
+  step (h, ne, mem) f =
+    let g = grounded f
+     in ( (h * 1000003 + sum [2 ^ a | a <- g] + 1) `mod` (2 ^ (61 :: Int) - 1)
+        , ne + fromEnum (not (null g))
+        , mem + length g )
 
 -- | Hukm is finite: quantify exhaustively rather than by sampling.
 forHukm :: Testable p => (Hukm -> p) -> Property
@@ -136,6 +161,8 @@ usulProperties =
       [ counterexample name (sort (grounded (AF n att)) === g)
       | (name, n, att, g) <- groundedVectors
       ])
+  , ("usul.af.grounded-stress-v1 (M5: 10^4 generated AFs, digest shared with Lean and Python)",
+      let (spec, digest) = groundedStress in once (stressDigest (stressAFs spec) === digest))
   , ("usul.taarud.jam-first (Lean: resolve_jam_first)", property $ \(p :: Int) n t ->
       resolve (Conflict (Just p) n t) === Jam p)
   , ("usul.taarud.tawaqquf-iff-exhausted (Lean: resolve_tawaqquf_iff)", property $ \(c :: (Maybe Int, Maybe Int, Maybe Int)) ->

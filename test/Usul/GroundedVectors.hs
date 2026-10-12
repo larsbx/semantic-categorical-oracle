@@ -1,6 +1,6 @@
 -- GENERATED from larsbx/usul-al-fiqh-deontic-circuits formal/fixtures/grounded-v1.json
--- at revision 603ef6967e55aa3c8b0399c6d1b5a0c37537c057. Do not edit; regenerate with gen_grounded.py --haskell.
-module Usul.GroundedVectors (groundedVectors) where
+-- at revision b796eb5d782e43e57c47c6fa14c37e6cc94dd279. Do not edit; regenerate with gen_grounded.py --haskell.
+module Usul.GroundedVectors (groundedVectors, groundedStress) where
 
 groundedVectors :: [(String, Int, [(Int, Int)], [Int])]
 groundedVectors =
@@ -52,3 +52,8 @@ groundedVectors =
   , ("random_38", 7, [(0, 6), (1, 6), (2, 1), (2, 3), (2, 4), (3, 0), (3, 3), (4, 1), (4, 2), (5, 0), (5, 4), (6, 3), (6, 6)], [2, 5])
   , ("random_39", 1, [], [0])
   ]
+
+-- | M5 differential exit: (seed, count, nMax, num, den) of the seeded MMIX LCG and the digest
+-- (fingerprint, non-empty, members) of the grounded extensions, from grounded-stress-v1.json.
+groundedStress :: ((Integer, Int, Int, Integer, Integer), (Integer, Int, Int))
+groundedStress = ((1421, 10000, 7, 1, 4), (2254257084300117683, 7428, 12783))
