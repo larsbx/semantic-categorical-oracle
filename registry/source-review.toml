@@ -122,13 +122,13 @@ files = []
 [[review]]
 candidate_id = "usul-argumentation-kernel"
 repository = "larsbx/usul-al-fiqh-deontic-circuits"
-revision = "3cd93a8817ffa4edf10a944b63c50e991cc6da04"
+revision = "50f04fcaf60638063f44d688eccde29bd83837f7"
 files = [
   { path = "formal/fixtures/grounded-v1.json", blob = "4a87cd721e7b4f128ff5815fc832a2dff074ac79" },
   { path = "formal/fixtures/grounded-stress-v1.json", blob = "23baa0f2702c00664855bcc001607484e6b666a9" },
   { path = "formal/lean/UsulTest/GroundedStress.lean", blob = "554235d639fb44605272d9976d493de7b4961bcc" },
   { path = "formal/fixtures/gen_grounded.py", blob = "abd3d4cc4e88fe939ba90494ca05924694742555" },
-  { path = "formal/lean/Usul/Dung.lean", blob = "ad8759549bdefa918e7fdc338f598a0f1204c27a" },
+  { path = "formal/lean/Usul/Dung.lean", blob = "0e0ebceb7075286b7c87c8ac9e0e21658beded32" },
   { path = "formal/lean/Usul/Grounded.lean", blob = "3141db97e19719a265cf5b443003fd3415a078b0" },
   { path = "formal/lean/Usul/Hukm.lean", blob = "32adea2b9b11d1420b7d6eb6b5d34b2b40bf909d" },
   { path = "formal/lean/Usul/Taarud.lean", blob = "18e645aa1a7fa30b64b9727f2dc0e3d0212dba30" },
@@ -146,8 +146,8 @@ files = [
   { path = "corpus/proposals/sadi_qawaid.json", blob = "b7e78a2235b06189b064f650059648d6f2697d45" },
   { path = "corpus/review/sadi_interpretive_questions.json", blob = "fb76111bcef628413ded9ebb8c1b02c1fd84dd82" },
   { path = "corpus/citations/qiyas_principles.json", blob = "099ed0370fff5030c513ae7fc0f9f1934b65e350" },
-  { path = "corpus/takhrij/report.json", blob = "72d708116b534dba857be5785038c39dc96980c8" },
-  { path = "corpus/reconciliation/report.json", blob = "557931f26cfc1a0b1152702ed099cf0430172596" },
+  { path = "corpus/takhrij/report.json", blob = "d793249388bb92f2b7c6e2a8dd2784e750ed7539" },
+  { path = "corpus/reconciliation/report.json", blob = "9dddb77cfb3eb57a08b6adefbe2eeedc6d4a90e5" },
   { path = "corpus/dossier/refinements.json", blob = "2e6602f1c06b944c5f88c72c60109ee661b64087" },
   { path = "corpus/dossier/glossary.json", blob = "c57e2be62df60ff55d1b44d2e816d65a4f8d6753" },
   { path = "corpus/reconciliation/ledger.json", blob = "8199f30e09a534f11083de0d316d76b67e97a811" },
