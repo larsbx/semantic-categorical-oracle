@@ -1,5 +1,5 @@
 -- GENERATED from larsbx/usul-al-fiqh-deontic-circuits formal/fixtures/grounded-v1.json
--- at revision b796eb5d782e43e57c47c6fa14c37e6cc94dd279. Do not edit; regenerate with gen_grounded.py --haskell.
+-- at revision 3cd93a8817ffa4edf10a944b63c50e991cc6da04. Do not edit; regenerate with gen_grounded.py --haskell.
 module Usul.GroundedVectors (groundedVectors, groundedStress) where
 
 groundedVectors :: [(String, Int, [(Int, Int)], [Int])]
