@@ -26,12 +26,56 @@ filter   : Policy → R → A → Admission
    `incompatible = {(⊥,→), (⊥,≡), (≡,≠)}` and collapsing a class counts as `≡`;
 6. **quarantine** every class touching a conflict. The filter never picks a side;
 7. **retain** the saturated assertions among admitted classes, so downstream
-   oracles receive derived links too (note `"derived"`, certainty = weakest premise).
+   oracles receive derived links too (provenance `Derived`, certainty = weakest premise).
 
 Laws (`test/Concept/Laws.hs`, registered in `registry/laws.toml`): normal form
 is idempotent and order/orientation invariant; saturation is a fixpoint; no
 admitted concept lies in a conflict; retained assertions stay inside the
 admitted set and are transitively closed; and the filter is idempotent on its own output.
+
+## Running it: `concept-filter`
+
+A stateless executable: JSON on stdin, the admission as JSON on stdout.
+
+```sh
+cabal run -v0 concept-filter < fixtures/concept-filter/synonyms-and-derived/input.json
+```
+
+Input is either a request object or a bare assertion array (the tui-story LLM
+shape, whose concept set is then every endpoint of a well-typed assertion):
+
+```json
+{
+  "concepts": ["Car", "automobile", "wheel"],
+  "assertions": [{"from": "car", "to": "automobile", "type": "synonymous", "certainty": 0.9, "description": "optional"}],
+  "policy": {"min_certainty": 0.5, "relations": ["synonymous", "part_whole"]}
+}
+```
+
+Output keys: `admitted`, `aliases` (`alias` → `canonical`), `retained` (each with
+`type`, `symbol`, `certainty`, `description`, `derived`), `conflicts`,
+`quarantined`, `invalid_concepts`, `invalid_assertions` (by input `index`).
+
+| Exit | Meaning |
+|---|---|
+| `0` | admitted, nothing quarantined |
+| `2` | admitted, but some concepts were quarantined: treat as fail-closed |
+| `1` | malformed request or policy; nothing on stdout, reason on stderr |
+
+A malformed *assertion* is reported in `invalid_assertions` and skipped; a
+malformed *request or policy* rejects everything. Golden cases live in
+`fixtures/concept-filter/` and run in CI via `scripts/golden_concept_filter.py`.
+
+Pipeline use:
+
+```sh
+llm-extract | concept-filter > admission.json
+case $? in
+  0) oracle < admission.json ;;
+  2) echo "quarantined concepts; see admission.json" >&2; exit 2 ;;
+  *) exit 1 ;;
+esac
+```
 
 ## What was not migrated
 

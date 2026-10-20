@@ -1,0 +1,9 @@
+{
+  "concepts": ["p", "q", "r", "s"],
+  "assertions": [
+    {"from": "p", "to": "q", "type": "implicative", "certainty": 0.9},
+    {"from": "q", "to": "r", "type": "implicative", "certainty": 0.8},
+    {"from": "r", "to": "p", "type": "contradictory", "certainty": 0.7},
+    {"from": "q", "to": "s", "type": "analogous", "certainty": 0.6}
+  ]
+}

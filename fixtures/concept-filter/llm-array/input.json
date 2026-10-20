@@ -1,0 +1,8 @@
+[
+  {"from": "Free will", "to": "determinism", "type": "CONTRADICTORY", "certainty": 0.4, "description": "classic tension"},
+  {"from": "compatibilism", "to": "free will", "type": "hierarchical", "certainty": 0.8},
+  {"from": "compatibilism", "to": "determinism", "type": "friendship", "certainty": 0.9},
+  {"from": "determinism", "to": "causality", "type": "implicative", "certainty": 1.5},
+  {"from": "", "to": "causality", "type": "causal", "certainty": 0.9},
+  {"to": "causality", "type": "causal", "certainty": 0.9}
+]

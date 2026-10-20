@@ -1,0 +1,9 @@
+{
+  "concepts": ["a", "b", "c"],
+  "assertions": [
+    {"from": "a", "to": "b", "type": "causal", "certainty": 0.7},
+    {"from": "b", "to": "c", "type": "analogous", "certainty": 0.9},
+    {"from": "a", "to": "c", "type": "causal", "certainty": 0.65}
+  ],
+  "policy": {"min_certainty": 0.68, "relations": ["causal"]}
+}

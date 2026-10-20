@@ -19,8 +19,9 @@ effect authorization, or persisted operational state.
 - **Concept pre-filter (advisory):** `Oracle.Concept.{Relation,Validate,Assertion,Filter}`
   migrate the semantic-relation core of `larsbx/tui-story` (candidate
   `tui-story-concept-filter`). Concepts are validated, synonyms collapsed, and any
-  concept involved in a contradiction quarantined before an oracle runs. See
-  `docs/concept-prefilter.md`.
+  concept involved in a contradiction quarantined before an oracle runs. Run it as
+  `cabal run concept-filter < request.json` (JSON in, JSON out; exit 2 on
+  quarantine). See `docs/concept-prefilter.md`.
 
 - **Ḥanbalī uṣūl kernel (advisory):** `Oracle.Usul.{Hukm,Argumentation,Taarud,Sadi}`
   mirror the Lean kernel in `larsbx/usul-al-fiqh-deontic-circuits` (registered as
