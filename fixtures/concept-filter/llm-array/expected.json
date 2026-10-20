@@ -1,0 +1,40 @@
+{
+    "admitted": [
+        "compatibilism",
+        "determinism",
+        "free will"
+    ],
+    "aliases": [],
+    "conflicts": [],
+    "invalid_assertions": [
+        {
+            "error": "type: unknown relation \"friendship\"",
+            "index": 2
+        },
+        {
+            "error": "certainty: out of range 1.5",
+            "index": 3
+        },
+        {
+            "error": "from: empty",
+            "index": 4
+        },
+        {
+            "error": "schema: Error in $: key \"from\" not found",
+            "index": 5
+        }
+    ],
+    "invalid_concepts": [],
+    "quarantined": [],
+    "retained": [
+        {
+            "certainty": 0.8,
+            "derived": false,
+            "description": "",
+            "from": "compatibilism",
+            "symbol": "\u2286",
+            "to": "free will",
+            "type": "hierarchical"
+        }
+    ]
+}

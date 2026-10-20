@@ -38,6 +38,16 @@ executable semantic-categorical-oracle
       base >=4.17 && <5,
       semantic-categorical-oracle
 
+executable concept-filter
+  import: warnings
+  hs-source-dirs: cli
+  main-is: Main.hs
+  build-depends:
+      base >=4.17 && <5,
+      aeson >=2.1 && <2.3,
+      bytestring >=0.11 && <0.13,
+      semantic-categorical-oracle
+
 test-suite laws
   import: warnings
   type: exitcode-stdio-1.0

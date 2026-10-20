@@ -1,0 +1,36 @@
+{
+    "admitted": [
+        "q",
+        "s"
+    ],
+    "aliases": [],
+    "conflicts": [
+        {
+            "pair": [
+                "p",
+                "r"
+            ],
+            "relations": [
+                "contradictory",
+                "implicative"
+            ]
+        }
+    ],
+    "invalid_assertions": [],
+    "invalid_concepts": [],
+    "quarantined": [
+        "p",
+        "r"
+    ],
+    "retained": [
+        {
+            "certainty": 0.6,
+            "derived": false,
+            "description": "",
+            "from": "q",
+            "symbol": "\u2248",
+            "to": "s",
+            "type": "analogous"
+        }
+    ]
+}

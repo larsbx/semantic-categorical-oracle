@@ -1,0 +1,10 @@
+{
+  "concepts": ["Car", "automobile", "wheel", "vehicle", "machine", "Tyre"],
+  "assertions": [
+    {"from": "car", "to": "automobile", "type": "synonymous", "certainty": 0.9},
+    {"from": "wheel", "to": "car", "type": "part_whole", "certainty": 0.8, "description": "a car has wheels"},
+    {"from": "car", "to": "vehicle", "type": "hierarchical", "certainty": 0.95},
+    {"from": "vehicle", "to": "machine", "type": "hierarchical", "certainty": 0.7, "description": "derived"},
+    {"from": "tyre", "to": "wheel", "type": "hierarchical", "certainty": 0.3}
+  ]
+}

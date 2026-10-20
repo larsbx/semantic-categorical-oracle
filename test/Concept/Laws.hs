@@ -28,6 +28,7 @@ assertion =
     <*> elements relations
     <*> elements (map (fromJust . certainty) [0, 0.25, 0.5, 0.75, 1])
     <*> elements ["", "x", "y"]
+    <*> pure Asserted
 
 forGraph :: Testable p => ([Assertion] -> p) -> Property
 forGraph = forAllShow (resize 12 (listOf assertion)) show
@@ -44,7 +45,7 @@ admit :: [Assertion] -> Admission
 admit = filterConcepts defaultPolicy universe
 
 rel :: String -> Relation -> String -> Double -> Assertion
-rel s r t p = Assertion (concept s) (concept t) r (fromJust (certainty p)) ""
+rel s r t p = Assertion (concept s) (concept t) r (fromJust (certainty p)) "" Asserted
 
 conceptProperties :: [(String, Property)]
 conceptProperties =
@@ -117,8 +118,14 @@ conceptProperties =
                 [rel "p" Implicative "q" 0.9, rel "q" Implicative "r" 0.6]
        in retained a
             === [ rel "p" Implicative "q" 0.9
-                , (rel "p" Implicative "r" 0.6) {assertionNote = "derived"}
+                , (rel "p" Implicative "r" 0.6) {assertionProvenance = Derived}
                 , rel "q" Implicative "r" 0.6 ])
+  , ("concept.filter.asserted-wins-tie-with-derived",
+      let explicit = (rel "p" Implicative "r" 0.6) {assertionNote = "stated"}
+       in filter ((== concept "r") . assertionTarget)
+            (retained (filterConcepts defaultPolicy ["p", "q", "r"]
+              [rel "p" Implicative "q" 0.9, rel "q" Implicative "r" 0.6, explicit]))
+            === [explicit, rel "q" Implicative "r" 0.6])
   , ("concept.filter.retained-closed", forGraph $ \xs ->
       let ys = retained (admit xs) in saturate ys === ys)
   , ("concept.filter.foreign-endpoints-discarded",

@@ -1,0 +1,57 @@
+{
+    "admitted": [
+        "automobile",
+        "machine",
+        "tyre",
+        "vehicle",
+        "wheel"
+    ],
+    "aliases": [
+        {
+            "alias": "car",
+            "canonical": "automobile"
+        }
+    ],
+    "conflicts": [],
+    "invalid_assertions": [],
+    "invalid_concepts": [],
+    "quarantined": [],
+    "retained": [
+        {
+            "certainty": 0.7,
+            "derived": true,
+            "description": "",
+            "from": "automobile",
+            "symbol": "\u2286",
+            "to": "machine",
+            "type": "hierarchical"
+        },
+        {
+            "certainty": 0.95,
+            "derived": false,
+            "description": "",
+            "from": "automobile",
+            "symbol": "\u2286",
+            "to": "vehicle",
+            "type": "hierarchical"
+        },
+        {
+            "certainty": 0.7,
+            "derived": false,
+            "description": "derived",
+            "from": "vehicle",
+            "symbol": "\u2286",
+            "to": "machine",
+            "type": "hierarchical"
+        },
+        {
+            "certainty": 0.8,
+            "derived": false,
+            "description": "a car has wheels",
+            "from": "wheel",
+            "symbol": "\u2208",
+            "to": "automobile",
+            "type": "part_whole"
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "admitted": [
+        "a",
+        "b",
+        "c"
+    ],
+    "aliases": [],
+    "conflicts": [],
+    "invalid_assertions": [],
+    "invalid_concepts": [],
+    "quarantined": [],
+    "retained": [
+        {
+            "certainty": 0.7,
+            "derived": false,
+            "description": "",
+            "from": "a",
+            "symbol": "\u21d2",
+            "to": "b",
+            "type": "causal"
+        }
+    ]
+}

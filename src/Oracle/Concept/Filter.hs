@@ -33,7 +33,7 @@ data Conflict = Conflict
 
 -- | The pre-oracle concept set. Every concept that took part in a conflict is
 -- quarantined rather than resolved: the filter never picks a side. 'retained'
--- is transitively closed; derived assertions carry the note @"derived"@.
+-- is transitively closed; derived assertions have provenance 'Derived'.
 data Admission = Admission
   { admitted :: [Concept]
   , aliases :: [(Concept, Concept)]

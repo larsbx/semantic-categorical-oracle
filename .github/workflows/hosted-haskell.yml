@@ -56,3 +56,6 @@ jobs:
           output="$("$executable")"
           printf '%s\n' "$output"
           test "$output" = "LawHoldsForTestDomain"
+
+      - name: Run concept-filter golden fixtures
+        run: python3 scripts/golden_concept_filter.py "$(cabal list-bin exe:concept-filter)"

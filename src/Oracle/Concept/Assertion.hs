@@ -2,6 +2,7 @@ module Oracle.Concept.Assertion
   ( Certainty
   , certainty
   , certaintyValue
+  , Provenance (..)
   , Assertion (..)
   , RawAssertion (..)
   , AssertionError (..)
@@ -13,7 +14,7 @@ module Oracle.Concept.Assertion
 
 import Data.Function (on)
 import Data.List (groupBy, maximumBy, sortOn)
-import Data.Ord (comparing)
+import Data.Ord (Down (..), comparing)
 import Oracle.Concept.Relation (Relation, isSymmetric, isTransitive, parseRelation)
 import Oracle.Concept.Validate (Concept, ConceptError, validateConcept)
 
@@ -29,6 +30,10 @@ certainty x
 certaintyValue :: Certainty -> Double
 certaintyValue (Certainty x) = x
 
+-- | Whether an assertion was supplied or obtained by 'saturate'.
+data Provenance = Asserted | Derived
+  deriving (Eq, Ord, Show)
+
 -- | A claimed relation between two concepts. Representation only: an
 -- assertion is evidence offered to the filter, never a decided fact.
 data Assertion = Assertion
@@ -37,6 +42,7 @@ data Assertion = Assertion
   , assertionRelation :: Relation
   , assertionCertainty :: Certainty
   , assertionNote :: String
+  , assertionProvenance :: Provenance
   }
   deriving (Eq, Ord, Show)
 
@@ -66,6 +72,7 @@ fromRaw raw =
     <*> maybe (Left (UnknownRelation (rawType raw))) Right (parseRelation (rawType raw))
     <*> maybe (Left (CertaintyOutOfRange (rawCertainty raw))) Right (certainty (rawCertainty raw))
     <*> pure (rawDescription raw)
+    <*> pure Asserted
 
 endpoints :: Assertion -> (Concept, Concept)
 endpoints a = (assertionSource a, assertionTarget a)
@@ -82,7 +89,8 @@ key a = (assertionSource a, assertionTarget a, assertionRelation a)
 
 -- | Canonical form: self-loops dropped, symmetric relations oriented, and one
 -- assertion per (source, target, relation) keeping the highest certainty
--- (tui-story @edge.ex@ duplicate rule). Sorted, hence order-independent.
+-- (tui-story @edge.ex@ duplicate rule), an asserted one winning a tie with a
+-- derived one. Sorted, hence order-independent.
 normalizeAssertions :: [Assertion] -> [Assertion]
 normalizeAssertions =
   map (maximumBy (comparing strength))
@@ -91,7 +99,7 @@ normalizeAssertions =
     . filter (uncurry (/=) . endpoints)
     . map orient
  where
-  strength a = (assertionCertainty a, assertionNote a)
+  strength a = (assertionCertainty a, Down (assertionProvenance a), assertionNote a)
 
 -- | Least fixpoint of transitive composition, with the weaker premise as the
 -- derived certainty (Gödel t-norm). Terminates: keys and certainties range
@@ -101,11 +109,11 @@ saturate = go . normalizeAssertions
  where
   go xs = let next = normalizeAssertions (xs ++ compose xs) in if next == xs then xs else go next
   compose xs =
-    [ Assertion a c r (min p q) "derived"
-    | Assertion a b r p _ <- views xs
+    [ Assertion a c r (min p q) "" Derived
+    | Assertion a b r p _ _ <- views xs
     , isTransitive r
-    , Assertion b' c r' q _ <- views xs
+    , Assertion b' c r' q _ _ <- views xs
     , r' == r
     , b' == b
     ]
-  views xs = xs ++ [Assertion t s r p n | Assertion s t r p n <- xs, isSymmetric r]
+  views xs = xs ++ [Assertion t s r p n o | Assertion s t r p n o <- xs, isSymmetric r]
