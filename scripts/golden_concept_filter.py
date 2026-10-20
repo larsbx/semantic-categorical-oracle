@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Run concept-filter against fixtures/concept-filter/*: exit code must match
+"""Run a concept-filter command (a binary path, or e.g. `docker run --rm -i
+IMAGE`) against fixtures/concept-filter/*: exit code must match
 `exit-code`, and stdout must equal `expected.json` as JSON (absent on exit 1,
 where stdout must be empty)."""
 
@@ -13,9 +14,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1] / "fixtures" / "concept-filter"
 
 
-def run(binary: str, case: Path) -> list[str]:
+def run(command: list[str], case: Path) -> list[str]:
     result = subprocess.run(
-        [binary], stdin=(case / "input.json").open("rb"), capture_output=True, check=False
+        command, stdin=(case / "input.json").open("rb"), capture_output=True, check=False
     )
     want_code = int((case / "exit-code").read_text())
     errors = []
@@ -31,12 +32,12 @@ def run(binary: str, case: Path) -> list[str]:
 
 
 def main() -> None:
-    if len(sys.argv) != 2:
-        raise SystemExit("usage: golden_concept_filter.py <concept-filter binary>")
+    if len(sys.argv) < 2:
+        raise SystemExit("usage: golden_concept_filter.py <concept-filter command...>")
     cases = sorted(path for path in ROOT.iterdir() if path.is_dir())
     failed = False
     for case in cases:
-        errors = run(sys.argv[1], case)
+        errors = run(sys.argv[1:], case)
         print(f"{'FAIL' if errors else 'ok  '} {case.name}")
         for error in errors:
             print(f"     {error}")

@@ -66,10 +66,25 @@ A malformed *assertion* is reported in `invalid_assertions` and skipped; a
 malformed *request or policy* rejects everything. Golden cases live in
 `fixtures/concept-filter/` and run in CI via `scripts/golden_concept_filter.py`.
 
+### Container
+
+Published to `ghcr.io/larsbx/semantic-categorical-oracle/concept-filter` from
+`main` (tag `main`), release tags `v*` (tag = version), and every push (`sha-…`).
+Pull requests build the image and run the golden fixtures against it without
+publishing.
+
+```sh
+docker run --rm -i --network none --read-only \
+  ghcr.io/larsbx/semantic-categorical-oracle/concept-filter:main < request.json
+```
+
+The image is stateless and runs as an unprivileged user, so `--network none`
+and `--read-only` are safe to enforce.
+
 Pipeline use:
 
 ```sh
-llm-extract | concept-filter > admission.json
+llm-extract | docker run --rm -i --network none --read-only "$IMAGE" > admission.json
 case $? in
   0) oracle < admission.json ;;
   2) echo "quarantined concepts; see admission.json" >&2; exit 2 ;;

@@ -29,15 +29,16 @@ request v =
     Request
       <$> (Just <$> o .: "concepts")
       <*> o .: "assertions"
-      <*> (maybe (pure defaultPolicy) policy =<< o .:? "policy")
+      <*> (maybe (pure defaultPolicy) policy =<< o .:! "policy")
 
--- | Operator configuration fails closed: an unknown relation or an
+-- | Operator configuration fails closed: an unknown relation, a null field
+-- (@.:!@, unlike @.:?@, does not read null as absent), or an
 -- out-of-range threshold rejects the whole request.
 policy :: Value -> Parser FilterPolicy
 policy = withObject "policy" $ \o -> do
-  threshold <- o .:? "min_certainty" .!= minimumCertainty defaultPolicy
+  threshold <- o .:! "min_certainty" .!= minimumCertainty defaultPolicy
   _ <- maybe (fail "policy.min_certainty must lie in [0, 1]") pure (certainty threshold)
-  tags <- o .:? "relations" :: Parser (Maybe [String])
+  tags <- o .:! "relations" :: Parser (Maybe [String])
   admits <- maybe (pure (admitsRelation defaultPolicy)) (fmap (flip elem) . traverse relation) tags
   pure (FilterPolicy threshold admits)
  where
