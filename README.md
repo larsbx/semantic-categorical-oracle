@@ -42,6 +42,8 @@ cabal test all
 cabal run semantic-categorical-oracle
 ```
 
+Planned work is tracked in `docs/ROADMAP.md`.
+
 Future artifacts must be labelled `authored_oracle`, `extracted_artifact`, or
 `vendored_reference`. Manual translations are never described as extracted,
 and semantic authority requires a separate versioned contract registration.
