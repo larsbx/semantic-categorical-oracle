@@ -44,7 +44,7 @@ Each contract becomes normative only through the promotion gates in
 | `sprucegoose-deployment-transition` | `pending_domain_contract` | The domain supplies canonical vectors and approval |
 | `cooperative-rule-replay` | `pending_domain_contract` | The domain defines replay inputs, equivalence, and ordering |
 | `objective-review-decision-plan` | `pending_domain_contract` | The domain names its semantic branches, binders, and sequencing |
-| `senad-transcript-structure` | `pending_domain_contract` | The production verifier boundary is settled |
+| `senad-transcript-structure` | `pending_domain_contract` | `larsbx/halaqa` publishes domain-owned canonical vectors. The boundary is already set: the spec owns structural encodings and equivalence, and the production verifier keeps certificate acceptance |
 
 ## Advisory oracles still to build
 
