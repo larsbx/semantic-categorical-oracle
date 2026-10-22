@@ -155,6 +155,23 @@ proofGraphRejectsWrongFormat =
     Left _ -> True === True
     Right _ -> False === True
 
+proofGraphRejectsConflictingCanonicalEdgeIdentity :: Property
+proofGraphRejectsConflictingCanonicalEdgeIdentity =
+  case normalizeGraphJson (BL8.pack conflictingGraph) of
+    Left _ -> True === True
+    Right _ -> False === True
+ where
+  conflictingGraph =
+    "{\"format\":\"finite typed relationship graph 1\","
+      ++ "\"edge_types\":[\"implicative\"],"
+      ++ "\"provenance_classes\":[\"theorem-backed\"],"
+      ++ "\"nodes\":["
+      ++ "{\"id\":\"Premise\",\"kind\":\"claim\",\"provenance\":\"theorem-backed\",\"source\":\"proof\"},"
+      ++ "{\"id\":\"Result\",\"kind\":\"claim\",\"provenance\":\"theorem-backed\",\"source\":\"proof\"}],"
+      ++ "\"edges\":["
+      ++ "{\"type\":\"implicative\",\"source\":\"Premise\",\"target\":\"Result\",\"provenance\":\"theorem-backed\",\"certainty\":1,\"use_site\":\"result/premise\"},"
+      ++ "{\"type\":\"implicative\",\"source\":\"Premise\",\"target\":\"Result\",\"provenance\":\"theorem-backed\",\"certainty\":1,\"use_site\":\"result/premise\",\"leaks\":\"different payload\"}]}"
+
 proofGraphRequiresTheoremBackingSource :: Property
 proofGraphRequiresTheoremBackingSource =
   case normalizeGraphJson (BL8.pack missingSourceGraph) of
@@ -228,6 +245,7 @@ main = do
       , check proofGraphProvenanceVector
       , check proofGraphDuplicateVector
       , check proofGraphRejectsWrongFormat
+      , check proofGraphRejectsConflictingCanonicalEdgeIdentity
       , check proofGraphRequiresTheoremBackingSource
       , check growthBridgeCycleBasisVector
       , check growthBridgeRejectsDifferentModule
