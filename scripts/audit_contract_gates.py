@@ -97,6 +97,8 @@ def main() -> None:
         fail("proof graph must remain non-normative until hosted conformance validates the pinned Haskell implementation")
     if proof_graph["contract_id"] != "finite-proof-graph.normalization":
         fail("proof graph contract identifier changed")
+    if proof_graph.get("domain_contract_version") != "1.0.0":
+        fail("proof graph domain contract version changed")
     if "observational_equivalence" in proof_graph["questions"]:
         fail("proof graph v1 does not define observational equivalence")
 
