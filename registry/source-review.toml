@@ -26,12 +26,17 @@ files = [
 [[review]]
 candidate_id = "finite-proof-graph"
 repository = "larsbx/finite-math-kernels"
-revision = "30b563fca4866fcf4c402d4e215b56eefc80e655"
+revision = "d4445ff59e7b5036081f56f066525ad7b60003fe"
+verified_at = "2026-10-22"
 files = [
-  { path = "proof_records/graph.py", blob = "ef2e4bbe3b1dbc16ec6bc501b06991a9fd7b8f00" },
-  { path = "proof_records/records.py", blob = "802ab06fcdf0e09ec652283acce7fe72701f58e4" },
-  { path = "fixtures/ledger/relationship-graph.json", blob = "d1e910f4e768e2372bb9df6bc28058c8ee0904be" },
-  { path = "fixtures/ledger/proof-graph-normalization-v1.json", blob = "42099396d382cdfd7fac8f807b4e32cd8fb3e679" },
+  { path = "kernel/proof_records/graph.py", blob = "eb9cca823b0d4ba74355bfd3cb5b1f37e2132a55" },
+  { path = "kernel/proof_records/records.py", blob = "8f68500479dfc20571e2dfc67ab1f9ee40f3dec4" },
+  { path = "docs/typed-relationship-graph-spec.md", blob = "5bb74e7173a5c88d3ee346ff62f0110324667077" },
+  { path = "schemas/typed-proof-graph-normalization-v1.json", blob = "688a9843e7a236915f031b9301aff539aafe907a" },
+  { path = "conformance/oracle/typed-proof-graph-minimal-v1.input.json", blob = "bae78ff68a290fbace151c2f759fec22402e73e9" },
+  { path = "conformance/oracle/typed-proof-graph-minimal-v1.expected.json", blob = "cf99268cd4330a3c3c9eb08314e45539fefd09f2" },
+  { path = "conformance/ledger/relationship-graph.json", blob = "d1e910f4e768e2372bb9df6bc28058c8ee0904be" },
+  { path = "conformance/oracle/typed-proof-graph-normalization-v1.json", blob = "bd87340c013556c67a738896e76b1d04384ff20d" },
 ]
 
 [[review]]

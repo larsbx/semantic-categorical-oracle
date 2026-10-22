@@ -24,8 +24,18 @@ jobs:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
+      - name: Check out immutable domain evidence (not executable code)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: larsbx/finite-math-kernels
+          ref: d4445ff59e7b5036081f56f066525ad7b60003fe
+          path: domain-evidence
+          persist-credentials: false
+
       - name: Audit source pins and authority boundaries
-        run: python3 scripts/audit_contract_gates.py
+        run: |
+          python3 scripts/audit_contract_gates.py --domain-checkout domain-evidence
+          python3 scripts/test_contract_gates.py
 
       - name: Install Haskell toolchain
         uses: haskell-actions/setup@cd0d9bdd65b20557f41bea4dbe43d0b5fbbfe553 # v2.11.0

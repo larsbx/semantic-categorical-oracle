@@ -3,19 +3,28 @@ globally_excluded = ["mathematical_proof", "certificate_acceptance", "effect_aut
 
 [[contract]]
 candidate_id = "finite-proof-graph"
-contract_id = "finite-proof-graph-normalization"
+contract_id = "finite-proof-graph.normalization"
 version = 1
+domain_contract_version = "1.0.0"
+target_domain_contract_version = "1.0.1"
 domain_repository = "larsbx/finite-math-kernels"
 domain_owner = "finite-math-kernels proof-record replay"
-status = "pending_domain_merge"
+status = "pending_domain_update"
 questions = ["contract_interpretation", "normal_form", "composition_preservation"]
 excluded = ["mathematical_proof", "certificate_acceptance", "effect_authorization", "persisted_state"]
-canonical_vectors_path = "fixtures/ledger/proof-graph-normalization-v1.json"
-canonical_vectors_revision = "30b563fca4866fcf4c402d4e215b56eefc80e655"
-canonical_vectors_blob = "42099396d382cdfd7fac8f807b4e32cd8fb3e679"
-approval_evidence = "finite-math-kernels PR #22"
+domain_schema_path = "schemas/typed-proof-graph-normalization-v1.json"
+domain_revision = "d4445ff59e7b5036081f56f066525ad7b60003fe"
+domain_schema_blob = "688a9843e7a236915f031b9301aff539aafe907a"
+approval_evidence = "finite-math-kernels PR #22 plus approved schemas/typed-proof-graph-normalization-v1.json at d4445ff"
+edge_identity = ["type", "source", "target", "provenance", "use_site"]
+edge_order = ["declared_edge_type_rank", "source", "target", "provenance", "use_site"]
+vector_pairs = [
+  { input_path = "conformance/oracle/typed-proof-graph-minimal-v1.input.json", input_blob = "bae78ff68a290fbace151c2f759fec22402e73e9", input_local = "fixtures/proof-graph/typed-proof-graph-minimal-v1.input.json", expected_path = "conformance/oracle/typed-proof-graph-minimal-v1.expected.json", expected_blob = "cf99268cd4330a3c3c9eb08314e45539fefd09f2", expected_local = "fixtures/proof-graph/typed-proof-graph-minimal-v1.expected.json" },
+  { input_path = "conformance/ledger/relationship-graph.json", input_blob = "d1e910f4e768e2372bb9df6bc28058c8ee0904be", input_local = "fixtures/proof-graph/relationship-graph-v1.input.json", expected_path = "conformance/oracle/typed-proof-graph-normalization-v1.json", expected_blob = "bd87340c013556c67a738896e76b1d04384ff20d", expected_local = "fixtures/proof-graph/relationship-graph-v1.expected.json" },
+]
 implementation = "Oracle.ProofGraph"
-activation_rule = "May become normative only after the domain PR is merged and this pin is advanced to the resulting canonical revision."
+blocker = "finite-math-kernels PR #77 repairs the approved edge-identity normalization contract to 1.0.1; the Haskell implementation anticipates that rule but cannot be promoted until the domain update merges and the registry is re-pinned to main."
+activation_rule = "After finite-math-kernels PR #77 merges, re-pin the domain sources/schema/vectors to the resulting main revision, set domain_contract_version to 1.0.1, return to pending_conformance_validation, and require hosted vector conformance before approval."
 
 [[contract]]
 candidate_id = "sprucegoose-deployment-reducer"

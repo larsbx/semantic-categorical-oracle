@@ -10,14 +10,16 @@ requires exact path agreement with the inventory, so paths cannot be added,
 removed, or silently retargeted without updating the review record.
 
 Only the finite proof-graph normalization contract advances to implementation.
-It remains `pending_domain_merge`, not normative, until the domain-owned vector
-PR is merged and the registry is repinned to the canonical domain revision.
+The domain-owned contract has since been approved in finite-math-kernels, so the
+old merge blocker is closed. The oracle implementation and source/vector pins
+now target the approved domain contract, but it remains non-normative under
+`pending_domain_update` while finite-math-kernels PR #77 repairs the domain edge-identity contract. The Haskell implementation already anticipates the 1.0.1 rule, but authority cannot advance until that patch merges, the registry is re-pinned to main, and hosted conformance then passes.
 
 ## Contract boundary findings
 
 | Candidate | Identifier | Question-set result | Gate |
 |---|---|---|---|
-| finite proof graph | `finite-proof-graph-normalization/v1` | Interpretation, normal form, and composition preservation are representation semantics. Observational equivalence is deliberately omitted. | Pending merge of finite-math-kernels PR #22 |
+| finite proof graph | `finite-proof-graph.normalization/1.0.0` (target `1.0.1`) | Interpretation, normal form, and composition preservation are representation semantics. Observational equivalence is deliberately omitted. | FMK PR #77 must merge; then re-pin 1.0.1 and run hosted conformance before promotion |
 | SpruceGoose deployment | `sprucegoose-deployment-transition/v1` | Transition interpretation and replay normalization are plausible. They must not authorize deployment or report current state. | Domain vectors and approval required |
 | cooperative replay | `cooperative-rule-replay/v1` | Replay/equivalence questions need domain definitions for ordering and inputs. | Domain vectors and approval required |
 | objective-review plan | `objective-review-decision-plan/v1` | Sequencing, branching, and binder preservation need a domain-owned syntax contract. | Domain vectors and approval required |
@@ -39,16 +41,9 @@ authority.
 
 ## First implementation
 
-`Oracle.ProofGraph` implements deterministic ordering and exact-duplicate
-collapse for representation-only nodes and edges. Provenance and use-site are
-part of the edge key, so open evidence cannot normalize into theorem-backed
-evidence. The module neither evaluates claim truth nor accepts proof records.
+`Oracle.ProofGraph` now retains the original bounded list helpers as advisory regressions and adds a generic JSON contract normalizer. The contract path validates the declared graph vocabulary and endpoints, requires certainty exactly 1, enforces theorem-backed source evidence, preserves arbitrary payload fields, discards only the non-semantic `generated` field, orders nodes by kind group and identifier, uses semantic edge identity `(type, source, target, provenance, use_site)`, collapses exact duplicates, refuses conflicting payloads under that identity, orders edges by `(declared_edge_type_rank, source, target, provenance, use_site)`, and emits recursively key-sorted canonical JSON. It neither evaluates claim truth nor accepts proof records.
 
-The property suite exercises the three domain-owned vectors:
-
-1. unordered independent records;
-2. provenance is semantic;
-3. exact duplicates collapse.
+The hosted property suite now checks both current domain-owned input/expected pairs byte-for-byte and negative fail-closed cases. Until that hosted conformance succeeds, the implementation remains advisory under `pending_domain_update`; its current edge-identity implementation anticipates the domain 1.0.1 patch but does not outrank the still-pinned 1.0.0 contract.
 
 GitHub-hosted CI remains an advisory mirror gate. Canonical source/merge and CI
 remain Forgejo and Woodpecker where applicable.
@@ -61,10 +56,28 @@ All 28 usul paths were checked against that revision’s Git tree. The corrected
 reconciliation report blob is pinned together with the previously omitted
 ledger, contradiction validator, schema, six-case acceptance audit and
 qualified-evidence archive. The inventory and review registry agree on all
-65 pinned paths across 15 candidates and retain five normative boundaries.
+72 pinned paths across 15 candidates and retain five normative boundaries.
 
 The domain retains 162 entries, 414 active evidence items and 73 residues.
 Two qualified passages remain in the archive rather than active grading.
 All six discrepancies remain candidate interpretations, including the recorded
 owner-knownness, theft-category and bequest-qarina scope limitations. This
 repin does not grant the Haskell mirror scholarly or proof authority.
+
+## Conformance evidence repair (2026-10-22)
+
+The schema pin is separate from `vector_pairs`. Both domain-owned input/expected
+pairs are linked to the reviewed revision and source blobs; the audit hashes all
+four vendored files as Git blobs and requires expected outputs to contain graph
+normal forms, rather than schemas. Hosted acceptance also verifies every path
+and blob against an immutable domain Git checkout. These checks run while pending
+as well as before any future promotion; they do not themselves approve a contract.
+
+The target edge rules are machine checked against the following declarations:
+
+edge_identity = ["type", "source", "target", "provenance", "use_site"]
+edge_order = ["declared_edge_type_rank", "source", "target", "provenance", "use_site"]
+
+The current domain pin remains 1.0.0. These edge rules anticipate 1.0.1 and do
+not establish that its upstream repair has merged. The existing promotion lock
+and all four authority exclusions remain in force.
