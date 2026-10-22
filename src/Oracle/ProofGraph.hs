@@ -60,6 +60,7 @@ data EdgeInfo = EdgeInfo
   { eiRank :: Int
   , eiSource :: T.Text
   , eiTarget :: T.Text
+  , eiProvenance :: T.Text
   , eiUseSite :: T.Text
   , eiValue :: Value
   }
@@ -87,13 +88,12 @@ normalizeGraph (Object root) = do
 
   edgeValues <- fieldArray root "edges"
   edges <- traverse (parseEdge edgeTypes provenanceClasses nodes) edgeValues
+  canonicalEdges <- canonicalizeEdges edges
 
   let sortedNodes =
         map niValue $
           sortOn (\n -> (niRank n, niId n)) nodes
-      sortedEdges =
-        map eiValue $
-          sortOn (\e -> (eiRank e, eiSource e, eiTarget e, eiUseSite e)) edges
+      sortedEdges = map eiValue canonicalEdges
       withoutGenerated = KM.delete "generated" root
       withNodes = KM.insert "nodes" (Array (V.fromList sortedNodes)) withoutGenerated
       withEdges = KM.insert "edges" (Array (V.fromList sortedEdges)) withNodes
@@ -158,10 +158,40 @@ parseEdge edgeTypes provenanceClasses nodes value@(Object obj) = do
     { eiRank = rank
     , eiSource = source
     , eiTarget = target
+    , eiProvenance = provenance
     , eiUseSite = useSite
     , eiValue = value
     }
 parseEdge _ _ _ _ = Left "every edge must be a JSON object"
+
+edgeIdentity :: EdgeInfo -> (Int, T.Text, T.Text, T.Text, T.Text)
+edgeIdentity edge =
+  ( eiRank edge
+  , eiSource edge
+  , eiTarget edge
+  , eiProvenance edge
+  , eiUseSite edge
+  )
+
+canonicalizeEdges :: [EdgeInfo] -> Either String [EdgeInfo]
+canonicalizeEdges = go . sortOn edgeIdentity
+ where
+  go [] = Right []
+  go (edge : rest) = do
+    let key = edgeIdentity edge
+        (sameIdentity, remaining) = span ((== key) . edgeIdentity) rest
+    unless (all ((== eiValue edge) . eiValue) sameIdentity) $
+      Left
+        ( "conflicting edges share canonical identity: "
+            ++ show
+              ( T.unpack (eiSource edge)
+              , T.unpack (eiTarget edge)
+              , T.unpack (eiProvenance edge)
+              , T.unpack (eiUseSite edge)
+              )
+        )
+    tailEdges <- go remaining
+    pure (edge : tailEdges)
 
 theoremBackedSourceTypes :: [T.Text]
 theoremBackedSourceTypes = ["implicative", "synonymous", "part-whole"]
