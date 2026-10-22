@@ -142,8 +142,8 @@ parseEdge edgeTypes provenanceClasses nodes value@(Object obj) = do
     Left ("edge has undeclared provenance " ++ T.unpack provenance)
 
   certainty <- fieldValue obj "certainty"
-  unless (certainty == Number 1) $
-    Left "edge certainty must be exactly 1"
+  unless (canonicalEncode certainty == BL8.pack "1") $
+    Left "edge certainty must be exactly the JSON integer 1"
 
   sourceNode <- lookupNode source nodes
   targetNode <- lookupNode target nodes
@@ -180,7 +180,8 @@ canonicalizeEdges = go . sortOn edgeIdentity
   go (edge : rest) = do
     let key = edgeIdentity edge
         (sameIdentity, remaining) = span ((== key) . edgeIdentity) rest
-    unless (all ((== eiValue edge) . eiValue) sameIdentity) $
+    let payload = canonicalEncode (eiValue edge)
+    unless (all ((== payload) . canonicalEncode . eiValue) sameIdentity) $
       Left
         ( "conflicting edges share canonical identity: "
             ++ show
