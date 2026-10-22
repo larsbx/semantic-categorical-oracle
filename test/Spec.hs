@@ -12,6 +12,7 @@ import Oracle.ProofGraph
   ( ProofEdge (..)
   , ProofNode (..)
   , normalizeEdges
+  , normalizeGraphJson
   , normalizeNodes
   )
 import Oracle.Result
@@ -21,6 +22,9 @@ import Oracle.Result
   , authoritativeFor
   )
 import Control.Monad (unless)
+import qualified Data.ByteString.Lazy as BL
+import qualified Data.ByteString.Lazy.Char8 as BL8
+import Paths_semantic_categorical_oracle (getDataFileName)
 import System.Exit (exitFailure)
 import Test.QuickCheck
   ( Property
@@ -144,6 +148,61 @@ proofGraphDuplicateVector =
   aliasEdge =
     ProofEdge "synonymous" "PIP census" "Census" "theorem-backed" "aliases"
 
+
+proofGraphRejectsWrongFormat :: Property
+proofGraphRejectsWrongFormat =
+  case normalizeGraphJson (BL8.pack "{\"format\":\"wrong\"}") of
+    Left _ -> True === True
+    Right _ -> False === True
+
+proofGraphRequiresTheoremBackingSource :: Property
+proofGraphRequiresTheoremBackingSource =
+  case normalizeGraphJson (BL8.pack missingSourceGraph) of
+    Left _ -> True === True
+    Right _ -> False === True
+ where
+  missingSourceGraph =
+    "{\"format\":\"finite typed relationship graph 1\","
+      ++ "\"edge_types\":[\"implicative\"],"
+      ++ "\"provenance_classes\":[\"theorem-backed\"],"
+      ++ "\"nodes\":["
+      ++ "{\"id\":\"Premise\",\"kind\":\"claim\",\"provenance\":\"theorem-backed\"},"
+      ++ "{\"id\":\"Result\",\"kind\":\"claim\",\"provenance\":\"theorem-backed\",\"source\":\"proof\"}],"
+      ++ "\"edges\":[{\"type\":\"implicative\",\"source\":\"Premise\",\"target\":\"Result\","
+      ++ "\"provenance\":\"theorem-backed\",\"certainty\":1,\"use_site\":\"result/premise\"}]}"
+
+proofGraphDomainVectors :: IO Bool
+proofGraphDomainVectors = do
+  results <-
+    mapM
+      checkPair
+      [ ( "minimal"
+        , "fixtures/proof-graph/typed-proof-graph-minimal-v1.input.json"
+        , "fixtures/proof-graph/typed-proof-graph-minimal-v1.expected.json"
+        )
+      , ( "relationship graph"
+        , "fixtures/proof-graph/relationship-graph-v1.input.json"
+        , "fixtures/proof-graph/relationship-graph-v1.expected.json"
+        )
+      ]
+  pure (and results)
+ where
+  checkPair (label, inputRel, expectedRel) = do
+    inputPath <- getDataFileName inputRel
+    expectedPath <- getDataFileName expectedRel
+    input <- BL.readFile inputPath
+    expected <- BL.readFile expectedPath
+    case normalizeGraphJson input of
+      Left err -> do
+        putStrLn ("proof-graph " ++ label ++ " refused: " ++ err)
+        pure False
+      Right actual ->
+        if actual == expected
+          then pure True
+          else do
+            putStrLn ("proof-graph " ++ label ++ " canonical bytes differ from the domain vector")
+            pure False
+
 -- | Run every property; exit non-zero if any fails (QuickCheck's 'quickCheck'
 -- alone always exits 0, so a failing law would not fail the suite).
 check :: Testable p => p -> IO Bool
@@ -168,6 +227,8 @@ main = do
       , check proofGraphNodeVector
       , check proofGraphProvenanceVector
       , check proofGraphDuplicateVector
+      , check proofGraphRejectsWrongFormat
+      , check proofGraphRequiresTheoremBackingSource
       , check growthBridgeCycleBasisVector
       , check growthBridgeRejectsDifferentModule
       , check growthBridgeRejectsCrossBasisComparison
@@ -177,4 +238,5 @@ main = do
   let named = mapM (\(name, p) -> putStrLn name >> check p)
   usul <- named usulProperties
   concepts <- named conceptProperties
-  unless (and (results ++ exclusions ++ rest ++ usul ++ concepts)) exitFailure
+  domainVectors <- proofGraphDomainVectors
+  unless (and (results ++ exclusions ++ rest ++ usul ++ concepts ++ [domainVectors])) exitFailure
