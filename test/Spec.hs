@@ -22,6 +22,7 @@ import Oracle.Result
   , authoritativeFor
   )
 import Control.Monad (unless)
+import Data.List (isInfixOf)
 import qualified Data.ByteString.Lazy as BL
 import qualified Data.ByteString.Lazy.Char8 as BL8
 import Paths_semantic_categorical_oracle (getDataFileName)
@@ -204,6 +205,28 @@ proofGraphRequiresTheoremBackingSource =
       ++ "\"edges\":[{\"type\":\"implicative\",\"source\":\"Premise\",\"target\":\"Result\","
       ++ "\"provenance\":\"theorem-backed\",\"certainty\":1,\"use_site\":\"result/premise\"}]}"
 
+-- Exercise the JSON normalizer, with provenance and use-site orders opposed.
+proofGraphJsonProvenanceOrder :: Property
+proofGraphJsonProvenanceOrder =
+  case (normalizeGraphJson (BL8.pack (graph [late, early])),
+        normalizeGraphJson (BL8.pack (graph [early, late]))) of
+    (Right actual, Right reversed) ->
+      (actual == reversed && (earlyCanonical ++ "," ++ lateCanonical) `isInfixOf` BL8.unpack actual) === True
+    _ -> False === True
+ where
+  graph edges =
+    "{\"format\":\"finite typed relationship graph 1\","
+      ++ "\"edge_types\":[\"implicative\"],\"provenance_classes\":[\"open\",\"conjectural\"],"
+      ++ "\"nodes\":[{\"id\":\"A\",\"kind\":\"claim\",\"provenance\":\"open\"},{\"id\":\"B\",\"kind\":\"claim\",\"provenance\":\"open\"}],"
+      ++ "\"edges\":[" ++ joinEdges edges ++ "]}"
+  joinEdges [] = ""
+  joinEdges [x] = x
+  joinEdges (x : xs) = x ++ "," ++ joinEdges xs
+  early = earlyCanonical
+  late = lateCanonical
+  earlyCanonical = "{\"certainty\":1,\"provenance\":\"conjectural\",\"source\":\"A\",\"target\":\"B\",\"type\":\"implicative\",\"use_site\":\"z\"}"
+  lateCanonical = "{\"certainty\":1,\"provenance\":\"open\",\"source\":\"A\",\"target\":\"B\",\"type\":\"implicative\",\"use_site\":\"a\"}"
+
 proofGraphDomainVectors :: IO Bool
 proofGraphDomainVectors = do
   results <-
@@ -259,6 +282,7 @@ main = do
       [ check inconclusiveNeverAuthoritativeProperty
       , check proofGraphNodeVector
       , check proofGraphProvenanceVector
+      , check proofGraphJsonProvenanceOrder
       , check proofGraphDuplicateVector
       , check proofGraphRejectsWrongFormat
       , check proofGraphRejectsFloatingCertainty

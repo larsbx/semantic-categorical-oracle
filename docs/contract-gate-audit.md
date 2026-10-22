@@ -41,7 +41,7 @@ authority.
 
 ## First implementation
 
-`Oracle.ProofGraph` now retains the original bounded list helpers as advisory regressions and adds a generic JSON contract normalizer. The contract path validates the declared graph vocabulary and endpoints, requires certainty exactly 1, enforces theorem-backed source evidence, preserves arbitrary payload fields, discards only the non-semantic `generated` field, orders nodes by kind group and identifier, orders edges by the declared edge-type order/source/target/use-site key, and emits recursively key-sorted canonical JSON. It neither evaluates claim truth nor accepts proof records.
+`Oracle.ProofGraph` now retains the original bounded list helpers as advisory regressions and adds a generic JSON contract normalizer. The contract path validates the declared graph vocabulary and endpoints, requires certainty exactly 1, enforces theorem-backed source evidence, preserves arbitrary payload fields, discards only the non-semantic `generated` field, orders nodes by kind group and identifier, uses semantic edge identity `(type, source, target, provenance, use_site)`, collapses exact duplicates, refuses conflicting payloads under that identity, orders edges by `(declared_edge_type_rank, source, target, provenance, use_site)`, and emits recursively key-sorted canonical JSON. It neither evaluates claim truth nor accepts proof records.
 
 The hosted property suite now checks both current domain-owned input/expected pairs byte-for-byte and negative fail-closed cases. Until that hosted conformance succeeds, the implementation remains advisory under `pending_domain_update`; its current edge-identity implementation anticipates the domain 1.0.1 patch but does not outrank the still-pinned 1.0.0 contract.
 
@@ -63,3 +63,21 @@ Two qualified passages remain in the archive rather than active grading.
 All six discrepancies remain candidate interpretations, including the recorded
 owner-knownness, theft-category and bequest-qarina scope limitations. This
 repin does not grant the Haskell mirror scholarly or proof authority.
+
+## Conformance evidence repair (2026-10-22)
+
+The schema pin is separate from `vector_pairs`. Both domain-owned input/expected
+pairs are linked to the reviewed revision and source blobs; the audit hashes all
+four vendored files as Git blobs and requires expected outputs to contain graph
+normal forms, rather than schemas. Hosted acceptance also verifies every path
+and blob against an immutable domain Git checkout. These checks run while pending
+as well as before any future promotion; they do not themselves approve a contract.
+
+The target edge rules are machine checked against the following declarations:
+
+edge_identity = ["type", "source", "target", "provenance", "use_site"]
+edge_order = ["declared_edge_type_rank", "source", "target", "provenance", "use_site"]
+
+The current domain pin remains 1.0.0. These edge rules anticipate 1.0.1 and do
+not establish that its upstream repair has merged. The existing promotion lock
+and all four authority exclusions remain in force.
