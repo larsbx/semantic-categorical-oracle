@@ -6,9 +6,10 @@ candidate_id = "finite-proof-graph"
 contract_id = "finite-proof-graph.normalization"
 version = 1
 domain_contract_version = "1.0.0"
+target_domain_contract_version = "1.0.1"
 domain_repository = "larsbx/finite-math-kernels"
 domain_owner = "finite-math-kernels proof-record replay"
-status = "pending_conformance_validation"
+status = "pending_domain_update"
 questions = ["contract_interpretation", "normal_form", "composition_preservation"]
 excluded = ["mathematical_proof", "certificate_acceptance", "effect_authorization", "persisted_state"]
 canonical_vectors_path = "schemas/typed-proof-graph-normalization-v1.json"
@@ -16,8 +17,8 @@ canonical_vectors_revision = "d4445ff59e7b5036081f56f066525ad7b60003fe"
 canonical_vectors_blob = "688a9843e7a236915f031b9301aff539aafe907a"
 approval_evidence = "finite-math-kernels PR #22 plus approved schemas/typed-proof-graph-normalization-v1.json at d4445ff"
 implementation = "Oracle.ProofGraph"
-blocker = "Oracle.ProofGraph and the registry pins now target the approved finite-math-kernels contract; hosted Haskell CI must pass both vendored domain vector pairs and the fail-closed regressions before promotion."
-activation_rule = "May become normative only after hosted conformance validates the current pinned implementation against both domain-owned vector pairs; then status may advance to approved without widening the excluded authority set."
+blocker = "finite-math-kernels PR #77 repairs the approved edge-identity normalization contract to 1.0.1; the Haskell implementation anticipates that rule but cannot be promoted until the domain update merges and the registry is re-pinned to main."
+activation_rule = "After finite-math-kernels PR #77 merges, re-pin the domain sources/schema/vectors to the resulting main revision, set domain_contract_version to 1.0.1, return to pending_conformance_validation, and require hosted vector conformance before approval."
 
 [[contract]]
 candidate_id = "sprucegoose-deployment-reducer"
