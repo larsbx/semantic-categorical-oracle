@@ -10,14 +10,16 @@ requires exact path agreement with the inventory, so paths cannot be added,
 removed, or silently retargeted without updating the review record.
 
 Only the finite proof-graph normalization contract advances to implementation.
-It remains `pending_domain_merge`, not normative, until the domain-owned vector
-PR is merged and the registry is repinned to the canonical domain revision.
+The domain-owned contract has since been approved in finite-math-kernels, so the
+old merge blocker is closed. The oracle remains non-normative under
+`pending_implementation_update` until its source/vector pins are refreshed and
+`Oracle.ProofGraph` conforms to the current domain-owned canonical vectors.
 
 ## Contract boundary findings
 
 | Candidate | Identifier | Question-set result | Gate |
 |---|---|---|---|
-| finite proof graph | `finite-proof-graph-normalization/v1` | Interpretation, normal form, and composition preservation are representation semantics. Observational equivalence is deliberately omitted. | Pending merge of finite-math-kernels PR #22 |
+| finite proof graph | `finite-proof-graph-normalization/v1` | Interpretation, normal form, and composition preservation are representation semantics. Observational equivalence is deliberately omitted. | Domain contract approved; Haskell implementation and pins must be updated to the current canonical normal form before promotion |
 | SpruceGoose deployment | `sprucegoose-deployment-transition/v1` | Transition interpretation and replay normalization are plausible. They must not authorize deployment or report current state. | Domain vectors and approval required |
 | cooperative replay | `cooperative-rule-replay/v1` | Replay/equivalence questions need domain definitions for ordering and inputs. | Domain vectors and approval required |
 | objective-review plan | `objective-review-decision-plan/v1` | Sequencing, branching, and binder preservation need a domain-owned syntax contract. | Domain vectors and approval required |
@@ -39,10 +41,13 @@ authority.
 
 ## First implementation
 
-`Oracle.ProofGraph` implements deterministic ordering and exact-duplicate
-collapse for representation-only nodes and edges. Provenance and use-site are
-part of the edge key, so open evidence cannot normalize into theorem-backed
-evidence. The module neither evaluates claim truth nor accepts proof records.
+`Oracle.ProofGraph` currently implements deterministic natural ordering and exact-duplicate
+collapse for a narrow representation-only node/edge model. That is useful advisory code,
+but it is not yet the complete current domain contract: the approved finite-math-kernels
+normalizer fixes kind-group node ordering, declared edge-type ordering, canonical JSON
+object encoding, payload preservation, and fail-closed preconditions. The module therefore
+remains non-normative until those semantics and vectors are implemented. It neither
+evaluates claim truth nor accepts proof records.
 
 The property suite exercises the three domain-owned vectors:
 
