@@ -56,7 +56,7 @@ All 28 usul paths were checked against that revision’s Git tree. The corrected
 reconciliation report blob is pinned together with the previously omitted
 ledger, contradiction validator, schema, six-case acceptance audit and
 qualified-evidence archive. The inventory and review registry agree on all
-69 pinned paths across 15 candidates and retain five normative boundaries.
+72 pinned paths across 15 candidates and retain five normative boundaries.
 
 The domain retains 162 entries, 414 active evidence items and 73 residues.
 Two qualified passages remain in the archive rather than active grading.
