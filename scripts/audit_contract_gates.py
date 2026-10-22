@@ -80,7 +80,7 @@ def main() -> None:
             fail(f"{candidate_id}: contract requests non-semantic authority")
         if set(contract["excluded"]) != EXCLUDED:
             fail(f"{candidate_id}: contract must retain every global exclusion")
-        if contract["status"] not in {"pending_domain_contract", "pending_domain_merge", "approved"}:
+        if contract["status"] not in {"pending_domain_contract", "pending_domain_merge", "pending_implementation_update", "approved"}:
             fail(f"{candidate_id}: unknown fail-closed status")
         if contract["status"] == "approved":
             for field in (
@@ -93,8 +93,8 @@ def main() -> None:
                     fail(f"{candidate_id}: approved contract lacks {field}")
 
     proof_graph = by_contract["finite-proof-graph"]
-    if proof_graph["status"] != "pending_domain_merge":
-        fail("proof graph must remain non-normative until its domain PR merges")
+    if proof_graph["status"] != "pending_implementation_update":
+        fail("proof graph must remain non-normative until its Haskell implementation and pins conform to the approved domain contract")
     if proof_graph["contract_id"] != "finite-proof-graph-normalization":
         fail("proof graph contract identifier changed")
     if "observational_equivalence" in proof_graph["questions"]:
