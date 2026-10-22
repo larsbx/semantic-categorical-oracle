@@ -1,4 +1,4 @@
-schema_version = "1.0.0"
+schema_version = 1
 globally_excluded = ["mathematical_proof", "certificate_acceptance", "effect_authorization", "persisted_state"]
 
 [[contract]]
