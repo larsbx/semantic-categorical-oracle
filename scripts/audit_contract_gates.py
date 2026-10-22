@@ -80,7 +80,7 @@ def main() -> None:
             fail(f"{candidate_id}: contract requests non-semantic authority")
         if set(contract["excluded"]) != EXCLUDED:
             fail(f"{candidate_id}: contract must retain every global exclusion")
-        if contract["status"] not in {"pending_domain_contract", "pending_domain_merge", "pending_implementation_update", "pending_conformance_validation", "approved"}:
+        if contract["status"] not in {"pending_domain_contract", "pending_domain_merge", "pending_implementation_update", "pending_domain_update", "pending_conformance_validation", "approved"}:
             fail(f"{candidate_id}: unknown fail-closed status")
         if contract["status"] == "approved":
             for field in (
@@ -93,12 +93,14 @@ def main() -> None:
                     fail(f"{candidate_id}: approved contract lacks {field}")
 
     proof_graph = by_contract["finite-proof-graph"]
-    if proof_graph["status"] != "pending_conformance_validation":
-        fail("proof graph must remain non-normative until hosted conformance validates the pinned Haskell implementation")
+    if proof_graph["status"] != "pending_domain_update":
+        fail("proof graph must remain non-normative until the finite-math-kernels 1.0.1 domain update merges and is re-pinned")
     if proof_graph["contract_id"] != "finite-proof-graph.normalization":
         fail("proof graph contract identifier changed")
     if proof_graph.get("domain_contract_version") != "1.0.0":
-        fail("proof graph domain contract version changed")
+        fail("proof graph currently pinned domain contract version changed")
+    if proof_graph.get("target_domain_contract_version") != "1.0.1":
+        fail("proof graph target domain contract version changed")
     if "observational_equivalence" in proof_graph["questions"]:
         fail("proof graph v1 does not define observational equivalence")
 
