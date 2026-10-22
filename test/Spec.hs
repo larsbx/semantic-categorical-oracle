@@ -155,6 +155,22 @@ proofGraphRejectsWrongFormat =
     Left _ -> True === True
     Right _ -> False === True
 
+proofGraphRejectsFloatingCertainty :: Property
+proofGraphRejectsFloatingCertainty =
+  case normalizeGraphJson (BL8.pack floatingCertaintyGraph) of
+    Left _ -> True === True
+    Right _ -> False === True
+ where
+  floatingCertaintyGraph =
+    "{\"format\":\"finite typed relationship graph 1\","
+      ++ "\"edge_types\":[\"implicative\"],"
+      ++ "\"provenance_classes\":[\"theorem-backed\"],"
+      ++ "\"nodes\":["
+      ++ "{\"id\":\"Premise\",\"kind\":\"claim\",\"provenance\":\"theorem-backed\",\"source\":\"proof\"},"
+      ++ "{\"id\":\"Result\",\"kind\":\"claim\",\"provenance\":\"theorem-backed\",\"source\":\"proof\"}],"
+      ++ "\"edges\":[{\"type\":\"implicative\",\"source\":\"Premise\",\"target\":\"Result\","
+      ++ "\"provenance\":\"theorem-backed\",\"certainty\":1.0,\"use_site\":\"result/premise\"}]}"
+
 proofGraphRejectsConflictingCanonicalEdgeIdentity :: Property
 proofGraphRejectsConflictingCanonicalEdgeIdentity =
   case normalizeGraphJson (BL8.pack conflictingGraph) of
@@ -245,6 +261,7 @@ main = do
       , check proofGraphProvenanceVector
       , check proofGraphDuplicateVector
       , check proofGraphRejectsWrongFormat
+      , check proofGraphRejectsFloatingCertainty
       , check proofGraphRejectsConflictingCanonicalEdgeIdentity
       , check proofGraphRequiresTheoremBackingSource
       , check growthBridgeCycleBasisVector
