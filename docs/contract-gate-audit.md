@@ -11,15 +11,16 @@ removed, or silently retargeted without updating the review record.
 
 Only the finite proof-graph normalization contract advances to implementation.
 The domain-owned contract has since been approved in finite-math-kernels, so the
-old merge blocker is closed. The oracle remains non-normative under
-`pending_implementation_update` until its source/vector pins are refreshed and
-`Oracle.ProofGraph` conforms to the current domain-owned canonical vectors.
+old merge blocker is closed. The oracle implementation and source/vector pins
+now target the approved domain contract, but it remains non-normative under
+`pending_conformance_validation` until hosted Haskell CI proves both domain-owned
+vector pairs byte-for-byte and the fail-closed regressions pass.
 
 ## Contract boundary findings
 
 | Candidate | Identifier | Question-set result | Gate |
 |---|---|---|---|
-| finite proof graph | `finite-proof-graph-normalization/v1` | Interpretation, normal form, and composition preservation are representation semantics. Observational equivalence is deliberately omitted. | Domain contract approved; Haskell implementation and pins must be updated to the current canonical normal form before promotion |
+| finite proof graph | `finite-proof-graph.normalization/1.0.0` | Interpretation, normal form, and composition preservation are representation semantics. Observational equivalence is deliberately omitted. | Implementation and current FMK pins present; hosted conformance must pass before promotion |
 | SpruceGoose deployment | `sprucegoose-deployment-transition/v1` | Transition interpretation and replay normalization are plausible. They must not authorize deployment or report current state. | Domain vectors and approval required |
 | cooperative replay | `cooperative-rule-replay/v1` | Replay/equivalence questions need domain definitions for ordering and inputs. | Domain vectors and approval required |
 | objective-review plan | `objective-review-decision-plan/v1` | Sequencing, branching, and binder preservation need a domain-owned syntax contract. | Domain vectors and approval required |
@@ -41,19 +42,9 @@ authority.
 
 ## First implementation
 
-`Oracle.ProofGraph` currently implements deterministic natural ordering and exact-duplicate
-collapse for a narrow representation-only node/edge model. That is useful advisory code,
-but it is not yet the complete current domain contract: the approved finite-math-kernels
-normalizer fixes kind-group node ordering, declared edge-type ordering, canonical JSON
-object encoding, payload preservation, and fail-closed preconditions. The module therefore
-remains non-normative until those semantics and vectors are implemented. It neither
-evaluates claim truth nor accepts proof records.
+`Oracle.ProofGraph` now retains the original bounded list helpers as advisory regressions and adds a generic JSON contract normalizer. The contract path validates the declared graph vocabulary and endpoints, requires certainty exactly 1, enforces theorem-backed source evidence, preserves arbitrary payload fields, discards only the non-semantic `generated` field, orders nodes by kind group and identifier, orders edges by the declared edge-type order/source/target/use-site key, and emits recursively key-sorted canonical JSON. It neither evaluates claim truth nor accepts proof records.
 
-The property suite exercises the three domain-owned vectors:
-
-1. unordered independent records;
-2. provenance is semantic;
-3. exact duplicates collapse.
+The hosted property suite now checks both current domain-owned input/expected pairs byte-for-byte and negative fail-closed cases. Until that hosted conformance succeeds, the implementation remains advisory under `pending_conformance_validation`.
 
 GitHub-hosted CI remains an advisory mirror gate. Canonical source/merge and CI
 remain Forgejo and Woodpecker where applicable.
