@@ -10,7 +10,7 @@ authorization, or persisted-state authority into this repository.
 |---|---|---|
 | Authority model and registry audit | Fail-closed audit runs in CI | `Oracle.Result`, `scripts/audit_contract_gates.py` |
 | Bounded categorical laws | Spike | `Oracle.Category` |
-| Proof-graph normal form | Pending domain merge | `Oracle.ProofGraph` |
+| Proof-graph normal form | Pending implementation update | `Oracle.ProofGraph` |
 | PSC growth-bridge contracts | Proposed | `Oracle.GrowthBridge`, `docs/GROWTH_BRIDGE_CONTRACTS.md` |
 | Ḥanbalī uṣūl kernel mirror | Advisory, pinned to Lean | `Oracle.Usul.*` |
 | Concept pre-filter (from `tui-story`) | Advisory | `Oracle.Concept.*`, `docs/concept-prefilter.md` |
@@ -40,7 +40,7 @@ Each contract becomes normative only through the promotion gates in
 
 | Contract | Status | Unblocks when |
 |---|---|---|
-| `finite-proof-graph-normalization` | `pending_domain_merge` | The finite-math-kernels PR merges and the vector pin advances |
+| `finite-proof-graph-normalization` | `pending_implementation_update` | Re-pin to the approved finite-math-kernels contract and make `Oracle.ProofGraph` pass the current canonical vectors |
 | `sprucegoose-deployment-transition` | `pending_domain_contract` | The domain supplies canonical vectors and approval |
 | `cooperative-rule-replay` | `pending_domain_contract` | The domain defines replay inputs, equivalence, and ordering |
 | `objective-review-decision-plan` | `pending_domain_contract` | The domain names its semantic branches, binders, and sequencing |
