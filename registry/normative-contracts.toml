@@ -7,7 +7,7 @@ contract_id = "finite-proof-graph-normalization"
 version = 1
 domain_repository = "larsbx/finite-math-kernels"
 domain_owner = "finite-math-kernels proof-record replay"
-status = "pending_domain_merge"
+status = "pending_implementation_update"
 questions = ["contract_interpretation", "normal_form", "composition_preservation"]
 excluded = ["mathematical_proof", "certificate_acceptance", "effect_authorization", "persisted_state"]
 canonical_vectors_path = "fixtures/ledger/proof-graph-normalization-v1.json"
@@ -15,7 +15,8 @@ canonical_vectors_revision = "30b563fca4866fcf4c402d4e215b56eefc80e655"
 canonical_vectors_blob = "42099396d382cdfd7fac8f807b4e32cd8fb3e679"
 approval_evidence = "finite-math-kernels PR #22"
 implementation = "Oracle.ProofGraph"
-activation_rule = "May become normative only after the domain PR is merged and this pin is advanced to the resulting canonical revision."
+blocker = "The finite-math-kernels domain contract is approved, but Oracle.ProofGraph and its source/vector pins still implement the earlier narrow ordering/duplicate-collapse model. Re-pin to the current approved domain contract and make the Haskell implementation pass its canonical vectors before promotion."
+activation_rule = "May become normative only after the Haskell implementation and source/vector pins conform to the approved finite-math-kernels contract."
 
 [[contract]]
 candidate_id = "sprucegoose-deployment-reducer"
