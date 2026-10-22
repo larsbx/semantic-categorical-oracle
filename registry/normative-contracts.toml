@@ -5,6 +5,7 @@ globally_excluded = ["mathematical_proof", "certificate_acceptance", "effect_aut
 candidate_id = "finite-proof-graph"
 contract_id = "finite-proof-graph.normalization"
 version = 1
+domain_contract_version = "1.0.0"
 domain_repository = "larsbx/finite-math-kernels"
 domain_owner = "finite-math-kernels proof-record replay"
 status = "pending_conformance_validation"
